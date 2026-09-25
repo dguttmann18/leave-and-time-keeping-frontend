@@ -1,0 +1,19 @@
+.nav-bar {
+  grid-area: nav-bar;
+}
+
+.calendar {
+  grid-area: calendar;
+}
+
+.footer {
+  grid-area: footer
+}
+
+.main-page {
+  display: grid;
+  grid-template-areas:
+  'nav-bar calendar calendar calendar calendar'
+  'footer footer footer footer footer';
+  grid-template-columns: 15rem repeat(4, 1fr);
+}
