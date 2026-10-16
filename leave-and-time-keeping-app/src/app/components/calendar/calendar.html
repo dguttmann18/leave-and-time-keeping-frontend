@@ -1,3 +1,19 @@
 <section class="calendar">
-  <p>Calendar</p>
+  <div class="day-labels-container">
+    @for (day of days; track days[0]) {
+      <label>{{ day }}</label>
+    }
+  </div>
+
+  <div class="day-blocks-section">
+    @for (week of weeks(); track $index) {
+      @for (date of week; track $index) {
+        @if (date) {
+          <app-calendar-day [date]="date" />
+        } @else {
+          <div class="calendar-day empty"></div>
+        }
+      }
+    }
+  </div>
 </section>

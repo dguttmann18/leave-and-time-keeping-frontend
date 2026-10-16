@@ -1,3 +1,79 @@
 <section class="nav-bar">
-  <p>Nav Bar</p>
+
+  <div class="title-section">
+    <p>Chronos</p>
+    <label>Your ultimate employee management companion</label>
+  </div>
+
+  <div class="button-group">
+
+    <div class="button-group-section">
+      <div class="tab-section-heading">
+        <p (click)="goToCalendar()">Calendar</p>
+      </div>
+    </div>
+
+    <div class="button-group-section">
+      <div class="tab-section-heading">
+        <p>Time Sheets</p>
+
+        @if (this.timeSheetsExpanded) {
+          <img
+            src="right.png"
+            (click)="toggleTimeSheetsExpanded()"
+          >
+        } @else {
+          <img
+            src="down.png"
+            (click)="toggleTimeSheetsExpanded()"
+          >
+        }
+      </div>
+
+      @if (this.timeSheetsExpanded) {
+        <div class="tab-section">
+          <a
+            (click)="logTime()"
+            [ngClass]="{'active' : activePage === 'log-time'}"
+          >
+            Log Time
+          </a>
+          <a>View Time</a>
+          <a
+            (click)="goToProjects()"
+            [ngClass]="{'active' : activePage === 'projects'}"
+          >
+            Projects
+          </a>
+        </div>
+      }
+    </div>
+
+
+    <div class="button-group-section">
+      <div class="tab-section-heading">
+        <p>Leave</p>
+
+        @if (this.leaveExpanded) {
+          <img
+            src="right.png"
+            (click)="toggleLeaveExpanded()"
+          >
+        } @else {
+          <img
+            src="down.png"
+            (click)="toggleLeaveExpanded()"
+          >
+        }
+      </div>
+
+
+      @if (this.leaveExpanded) {
+        <div class="tab-section">
+          <a (click)="applyForLeave()" [ngClass]="{'active' : activePage === 'apply-for-leave'}">Apply for Leave</a>
+          <a>View Leave Availability</a>
+        </div>
+      }
+    </div>
+  </div>
 </section>

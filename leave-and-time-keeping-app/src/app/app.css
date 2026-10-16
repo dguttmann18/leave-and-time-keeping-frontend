@@ -1,9 +1,15 @@
+* {
+  font-family: Arial, serif;
+}
+
 .nav-bar {
   grid-area: nav-bar;
 }
 
-.calendar {
-  grid-area: calendar;
+.open-page {
+  grid-area: open-page;
+  min-width: 0;
+  min-height: 100vh;
 }
 
 .footer {
@@ -12,8 +18,10 @@
 
 .main-page {
   display: grid;
+  grid-template-columns: 15rem 1fr;
   grid-template-areas:
-  'nav-bar calendar calendar calendar calendar'
-  'footer footer footer footer footer';
-  grid-template-columns: 15rem repeat(4, 1fr);
+  'nav-bar open-page'
+  'nav-bar footer';
+  min-height: 100vh;
+  /*grid-template-columns: 15rem repeat(4, 1fr);*/
 }

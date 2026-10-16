@@ -1,0 +1,40 @@
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.month-picker {
+  height: 10rem;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+
+  p {
+    padding: 0.5rem;
+    width: 7rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  p:hover {
+    background-color: lightblue;
+  }
+}
+

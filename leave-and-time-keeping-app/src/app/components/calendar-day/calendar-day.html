@@ -1,0 +1,9 @@
+<section class="calendar-day">
+  <label>{{ this.date().day }}</label>
+
+  @for (event of events(); track event.id) {
+    <div class="leave-day">
+      <label>{{ event.leaveType}} leave</label>
+    </div>
+  }
+</section>

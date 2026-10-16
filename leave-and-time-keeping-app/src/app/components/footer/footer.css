@@ -11,3 +11,7 @@
 .main {
   font-weight: bold;
 }
+
+p {
+  margin: 0;
+}

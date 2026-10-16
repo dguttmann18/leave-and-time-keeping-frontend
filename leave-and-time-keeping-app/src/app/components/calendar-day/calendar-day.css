@@ -1,0 +1,17 @@
+.calendar-day {
+  border: solid lightgrey 1px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.leave-day {
+  background-color: red;
+  color: white;
+  width: auto;
+  padding: 5px;
+  border-radius: 5px;
+}

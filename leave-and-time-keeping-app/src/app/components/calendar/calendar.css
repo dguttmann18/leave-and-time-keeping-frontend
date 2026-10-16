@@ -1,4 +1,43 @@
 .calendar {
-  border: solid black 1px;
-  height: calc(100vh);
+  border-radius: 0.5rem;
+  height: calc(90vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Arial;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+
+  p {
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem 0;
+    /*font-family: Arial;*/
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}
+
+.day-labels-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-content: center;
+  align-items: center;
+
+  label {
+    border: solid lightgrey 1px;
+    text-align: center;
+  }
+}
+
+.day-blocks-section {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  height: 90%;
 }

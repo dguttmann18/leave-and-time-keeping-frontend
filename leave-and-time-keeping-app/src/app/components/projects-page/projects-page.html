@@ -1,0 +1,86 @@
+<section class="projects-page">
+
+  <div class="title-section">
+    <h2>Projects</h2>
+  </div>
+
+  <div class="main-section">
+    <form class="add-new-project" #projectForm="ngForm" (ngSubmit)="saveProject(projectForm)" novalidate>
+      <div class="new-project-title">
+        <h3>Add New Project</h3>
+      </div>
+
+      <div class="form-item">
+        <label>Project Name:</label>
+        <input name="name" [(ngModel)]="newProject.name" #name="ngModel" required />
+        @if (name.invalid && name.touched) {
+          <span class="field-error">Project name is required.</span>
+        }
+      </div>
+
+      <div class="form-item">
+        <label>Client:</label>
+        <input list="client-list" name="client" [(ngModel)]="newProject.client" #client="ngModel" required />
+        @if (client.invalid && client.touched) {
+          <span class="field-error">Client is required.</span>
+        }
+
+        <datalist id="client-list">
+          @for (client of clients; track $index) {
+            <option>{{ client }}</option>
+          }
+        </datalist>
+      </div>
+
+      <div class="form-item">
+        <label>Description:</label>
+        <input name="description" [(ngModel)]="newProject.description" #description="ngModel" required />
+        @if (description.invalid && description.touched) {
+          <span class="field-error">Description is required.</span>
+        }
+      </div>
+
+      @if (saveError()) {
+        <div class="form-item">
+          <span class="field-error">{{ saveError() }}</span>
+        </div>
+      }
+
+      <div class="button-section">
+        <button type="submit" [disabled]="saving()">{{ saving() ? 'Saving...' : 'Save' }}</button>
+      </div>
+
+    </form>
+
+    <div class="project-table">
+      <div class="new-project-title">
+        <h3>Current Projects</h3>
+      </div>
+
+      <table>
+        <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Client</th>
+          <th>Description</th>
+          <th>Dated Added</th>
+          <th class="status-cell">Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (project of projects(); track project.id) {
+            <tr>
+              <td>{{ project.name }}</td>
+              <td>{{ project.client }}</td>
+              <td>{{ project.description }}</td>
+              <td>{{ project.created | date: "dd-MMM-yyyy" }}</td>
+              <td class="status-cell">{{ project.active ? 'ACTIVE' : 'INACTIVE' }}</td>
+              <td class="button-cell"><button>Edit</button><button>Delete</button></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
