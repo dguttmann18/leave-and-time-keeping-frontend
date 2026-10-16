@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { CalendarContainer } from './components/calendar-container/calendar-container';
-import { ApplyForLeavePage } from './components/apply-for-leave-page/apply-for-leave-page';
-import { LogTimePage } from './components/log-time-page/log-time-page';
-import { ProjectsPage } from './components/projects-page/projects-page';
+import { CalendarPage } from './components/pages/calendar-page/calendar-page';
+import { ApplyForLeavePage } from './components/pages/apply-for-leave-page/apply-for-leave-page';
+import { TimeSheetPage } from './components/pages/time-sheet-page/time-sheet-page';
+import { ProjectsPage } from './components/pages/projects-page/projects-page';
 
 export const routes: Routes = [
   {
@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: "calendar",
-    component: CalendarContainer
+    component: CalendarPage
   },
   {
     path: "leave/apply",
@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: "time/log",
-    component: LogTimePage
+    component: TimeSheetPage
   },
   {
     path: "projects",

@@ -123,7 +123,7 @@ export const timeSheets: TimeSheetEntry[] = [
       client: 'Discovery Ltd',
     },
     hours: 8,
-    billable: true,
+    billable: false,
   },
   {
     id: 2,
@@ -136,7 +136,7 @@ export const timeSheets: TimeSheetEntry[] = [
       client: 'Momentum Insure',
     },
     hours: 8,
-    billable: true,
+    billable: false,
   },
   {
     id: 1,
@@ -188,6 +188,6 @@ export const timeSheets: TimeSheetEntry[] = [
       client: 'Momentum Insure',
     },
     hours: 8,
-    billable: true,
+    billable: false,
   },
 ];
