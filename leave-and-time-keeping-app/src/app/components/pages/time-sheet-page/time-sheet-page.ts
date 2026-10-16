@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { projects, timeSheets } from '../../data/time-sheet.data';
-import { DateService } from '../../services/date.service';
+import { projects, timeSheets } from '../../../data/time-sheet.data';
+import { DateService } from '../../../services/date.service';
 
 @Component({
-  selector: 'app-log-time-page',
-  imports: [DatePipe, ReactiveFormsModule],
-  templateUrl: './log-time-page.html',
-  styleUrl: './log-time-page.css',
+  selector: 'app-time-sheet-page',
+  imports: [DatePipe, ReactiveFormsModule, DecimalPipe],
+  templateUrl: './time-sheet-page.html',
+  styleUrl: './../../../app.css',
 })
-export class LogTimePage {
+export class TimeSheetPage {
   protected readonly projects = projects;
   protected readonly timeSheetEntries = timeSheets;
   private dateService = inject(DateService);

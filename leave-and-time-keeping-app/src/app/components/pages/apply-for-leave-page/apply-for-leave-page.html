@@ -1,12 +1,12 @@
-<section class="leave-page">
+<section class="page">
 
   <div class="title-section">
     <h2>Leave</h2>
   </div>
 
   <div class="main-section">
-    <div class="apply-for-leave">
-      <div class="new-leave-title">
+    <div class="add-new-entry">
+      <div class="new-entry-title">
         <h3>Apply for Leave</h3>
       </div>
 
@@ -53,8 +53,8 @@
       </div>
     </div>
 
-    <div class="leave-table">
-      <div class="new-leave-title">
+    <div class="table">
+      <div class="new-entry-title">
         <h3>Leave Applications</h3>
       </div>
 
@@ -76,8 +76,14 @@
               <td>{{ parseDate(leave.firstDay) | date: "dd-MMM-yyyy" }}</td>
               <td>{{ parseDate(leave.lastDay) | date: "dd-MMM-yyyy" }}</td>
               <td>{{ leave.leaveType }}</td>
-              <td>{{ leave.isPartial ? "YES" : "NO" }}</td>
-              <td>{{ leave.hours }}</td>
+
+              @if ( leave.isPartial) {
+                <td><label class="yes-data">YES</label></td>
+              } @else {
+                <td><label class="no-data">NO</label></td>
+              }
+
+              <td class="number-column">{{ leave.hours }}</td>
               <td>{{ leave.description}}</td>
 
               <td class="button-cell">

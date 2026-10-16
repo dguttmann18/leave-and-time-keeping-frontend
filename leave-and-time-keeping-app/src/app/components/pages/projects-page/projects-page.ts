@@ -1,15 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Project, ProjectRequest } from '../../models/time-sheet.model';
-import { TimeSheetService } from '../../services/time-sheet.service';
-import { DatePipe, NgClass } from '@angular/common';
-import { Modal } from '../modal/modal';
+import { Project, ProjectRequest } from '../../../models/time-sheet.model';
+import { TimeSheetService } from '../../../services/time-sheet.service';
+import { DatePipe } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-projects-page',
-  imports: [DatePipe, NgClass, Modal, FormsModule],
+  imports: [DatePipe, FormsModule],
   templateUrl: './projects-page.html',
-  styleUrl: './projects-page.css',
+  styleUrl: './../../../app.css',
 })
 export class ProjectsPage implements OnInit {
   private timeSheetService = inject(TimeSheetService);
@@ -29,8 +28,8 @@ export class ProjectsPage implements OnInit {
 
   loadProjects() {
     this.timeSheetService.getAllProjects().subscribe({
-      next: projects => this.projects.set(projects),
-      error: err => console.error('Failed to load projects', err),
+      next: (projects) => this.projects.set(projects),
+      error: (err) => console.error('Failed to load projects', err),
     });
   }
 
@@ -49,7 +48,7 @@ export class ProjectsPage implements OnInit {
         this.saving.set(false);
         this.loadProjects();
       },
-      error: err => {
+      error: (err) => {
         console.error('Failed to save project', err);
         this.saveError.set('Could not save the project. Please try again.');
         this.saving.set(false);

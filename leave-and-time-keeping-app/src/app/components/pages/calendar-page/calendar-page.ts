@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { Calendar } from '../calendar/calendar';
-import { DatePipe } from '@angular/common';
+import { Calendar } from '../../calendar/calendar';
 
 @Component({
-  selector: 'app-calendar-container',
-  imports: [Calendar, DatePipe],
-  templateUrl: './calendar-container.html',
-  styleUrl: './calendar-container.css',
+  selector: 'app-calendar-page',
+  imports: [Calendar],
+  templateUrl: './calendar-page.html',
+  styleUrl: './calendar-page.css',
 })
-export class CalendarContainer {
+export class CalendarPage {
   currentMonth = 10;
   currentYear = 2026;
   displayMonths: boolean = false;
