@@ -1,0 +1,93 @@
+<section class="leave-page">
+
+  <div class="title-section">
+    <h2>Leave</h2>
+  </div>
+
+  <div class="main-section">
+    <div class="apply-for-leave">
+      <div class="new-leave-title">
+        <h3>Apply for Leave</h3>
+      </div>
+
+      <div class="form-item">
+        <label>First Day:</label>
+        <input type="date" [defaultValue]="Date()"/>
+      </div>
+
+      <div class="form-item">
+        <label>Last Day:</label>
+        <input type="date" [defaultValue]="Date()"/>
+      </div>
+
+      <div class="form-item">
+        <label>Leave Type:</label>
+        <select>
+          <option>Annual</option>
+          <option>Sick</option>
+          <option>Study</option>
+          <option>Family Responsibility</option>
+          <option>Special</option>
+          <option>Unpaid</option>
+        </select>
+      </div>
+
+      <div class="form-item">
+        <label>Partial:</label>
+        <input class="check-box" type="checkbox"/>
+      </div>
+
+      <div class="form-item">
+        <label>Hours:</label>
+        <input type="number"/>
+      </div>
+
+      <div class="form-item">
+        <label>Description:</label>
+        <textarea></textarea>
+      </div>
+
+
+      <div class="button-section">
+        <button>Save</button>
+      </div>
+    </div>
+
+    <div class="leave-table">
+      <div class="new-leave-title">
+        <h3>Leave Applications</h3>
+      </div>
+
+      <table>
+        <thead>
+        <tr>
+          <th>First Day</th>
+          <th>Last Day</th>
+          <th>Type</th>
+          <th>Partial</th>
+          <th>Hours</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (leave of leaveApplications; track $index) {
+            <tr>
+              <td>{{ parseDate(leave.firstDay) | date: "dd-MMM-yyyy" }}</td>
+              <td>{{ parseDate(leave.lastDay) | date: "dd-MMM-yyyy" }}</td>
+              <td>{{ leave.leaveType }}</td>
+              <td>{{ leave.isPartial ? "YES" : "NO" }}</td>
+              <td>{{ leave.hours }}</td>
+              <td>{{ leave.description}}</td>
+
+              <td class="button-cell">
+                <button>Edit</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

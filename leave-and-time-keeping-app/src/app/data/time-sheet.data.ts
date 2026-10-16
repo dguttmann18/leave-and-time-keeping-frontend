@@ -1,0 +1,193 @@
+import { Project, TimeSheetEntry } from '../models/time-sheet.model';
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    created: '20260905',
+    name: 'Liberty Migration',
+    description: 'Rewrite microservices as Spring projects.',
+    client: 'Momentum Insure',
+  },
+  {
+    id: 2,
+    created: '20260823',
+    name: 'Employee Management System',
+    description: 'A system to manage employees of Psybergate.',
+    client: 'Psybergate (Pty) Ltd',
+  },
+  {
+    id: 3,
+    created: '20260110',
+    name: 'Frontend Upgrade',
+    description: 'Upgrade the UI of all web apps.',
+    client: 'Discovery Ltd',
+  },
+];
+
+export const clients: string[] = [
+  'Momentum Insure',
+  'Psybergate (Pty) Ltd',
+  'Absa',
+  'Nedbank',
+  'Investec',
+  'SwitchX',
+];
+
+export const timeSheets: TimeSheetEntry[] = [
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+  },
+];

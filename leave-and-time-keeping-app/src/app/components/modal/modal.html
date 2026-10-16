@@ -1,0 +1,12 @@
+<dialog #modalElement (cancel)="$event.preventDefault(); onClose()">
+  <div class="modal-wrapper">
+    <header>
+      <h3>{{ title() }}</h3>
+      <button class="close-btn" (click)="onClose()">x</button>
+    </header>
+
+    <main>
+      <ng-content></ng-content>
+    </main>
+  </div>
+</dialog>
