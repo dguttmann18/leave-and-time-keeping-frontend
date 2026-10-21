@@ -1,0 +1,41 @@
+<app-modal
+  [isOpen]="this.isOpen()"
+  title="Time Sheet Entry"
+  (closeModal)="closeModal()"
+>
+  <div class="add-new-entry">
+    <div class="form-item">
+      <label>Date:</label>
+      <input type="date" [defaultValue]="Date()"/>
+    </div>
+
+    <div class="form-item">
+      <label>Project:</label>
+      <select>
+        @for (project of projects; track project.id) {
+          <option>{{ project.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-item">
+      <label>Description:</label>
+      <textarea></textarea>
+    </div>
+
+    <div class="form-item">
+      <label>Hours:</label>
+      <input type="number"/>
+    </div>
+
+    <div class="form-item">
+      <label>Billable:</label>
+      <input class="check-box" type="checkbox"/>
+    </div>
+
+    <div class="button-section">
+      <button>Save</button>
+    </div>
+
+  </div>
+</app-modal>

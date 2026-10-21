@@ -41,11 +41,11 @@
   .tab-section-heading {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     /*background-color: red;*/
     align-items: center;
 
-    width: 100%;
+    min-width: 100%;
 
     img {
       width: 1rem;
@@ -87,7 +87,8 @@
     /*background-color: green;*/
 
     a {
-      width: 100%;
+      /*width: 100%;*/
+      min-width: 100%;
       padding: 1rem;
     }
   }

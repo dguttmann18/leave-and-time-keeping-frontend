@@ -9,6 +9,7 @@ import { Component, effect, ElementRef, input, output, viewChild } from '@angula
 export class Modal {
   isOpen = input.required<boolean>();
   title = input<string>('Modal Title');
+
   closeModal = output<void>();
 
   private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('modalElement');
