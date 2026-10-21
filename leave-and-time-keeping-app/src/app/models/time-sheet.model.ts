@@ -19,4 +19,5 @@ export interface TimeSheetEntry {
   project?: Project;
   hours: number;
   billable?: boolean;
+  description?: string;
 }

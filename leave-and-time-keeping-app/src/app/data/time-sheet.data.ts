@@ -46,6 +46,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 2,
@@ -59,6 +60,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 1,
@@ -72,6 +74,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 2,
@@ -85,6 +88,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 1,
@@ -98,6 +102,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 2,
@@ -111,6 +116,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 1,
@@ -124,6 +130,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: false,
+    description: 'This is the description'
   },
   {
     id: 2,
@@ -137,6 +144,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: false,
+    description: 'This is the description'
   },
   {
     id: 1,
@@ -150,6 +158,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 2,
@@ -163,6 +172,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 1,
@@ -176,6 +186,7 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: true,
+    description: 'This is the description'
   },
   {
     id: 2,
@@ -189,5 +200,846 @@ export const timeSheets: TimeSheetEntry[] = [
     },
     hours: 8,
     billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 1,
+    dateOfEntry: '20260905',
+    project: {
+      id: 3,
+      created: '20260110',
+      name: 'Frontend Upgrade',
+      description: 'Upgrade the UI of all web apps.',
+      client: 'Discovery Ltd',
+    },
+    hours: 8,
+    billable: true,
+    description: 'This is the description'
+  },
+  {
+    id: 2,
+    dateOfEntry: '20260905',
+    project: {
+      id: 1,
+      created: '20260905',
+      name: 'Liberty Migration',
+      description: 'Rewrite microservices as Spring projects.',
+      client: 'Momentum Insure',
+    },
+    hours: 8,
+    billable: false,
+    description: 'This is the description'
   },
 ];

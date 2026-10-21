@@ -5,38 +5,66 @@
   </div>
 
   <div class="main-section">
-    <div class="add-new-entry">
-      <div class="new-entry-title">
-        <h3>New Entry</h3>
-      </div>
-
-      <div class="form-item">
-        <label>Date:</label>
-        <input type="date" [defaultValue]="Date()"/>
-      </div>
-
-      <div class="form-item">
-        <label>Project:</label>
-        <select>
-          @for (project of projects; track project.id) {
-            <option>{{ project.name }}</option>
-          }
-        </select>
-      </div>
-
-      <div class="form-item">
-        <label>Hours:</label>
-        <input type="number"/>
-      </div>
-
-      <div class="form-item">
-        <label>Billable:</label>
-        <input class="check-box" type="checkbox"/>
-      </div>
 
 
-      <div class="button-section">
-        <button>Save</button>
+    <!--    <div class="add-new-entry">-->
+    <!--      <div class="new-entry-title">-->
+    <!--        <h3>New Entry</h3>-->
+    <!--      </div>-->
+
+    <!--      <div class="form-item">-->
+    <!--        <label>Date:</label>-->
+    <!--        <input type="date" [defaultValue]="Date()"/>-->
+    <!--      </div>-->
+
+    <!--      <div class="form-item">-->
+    <!--        <label>Project:</label>-->
+    <!--        <select>-->
+    <!--          @for (project of projects; track project.id) {-->
+    <!--            <option>{{ project.name }}</option>-->
+    <!--          }-->
+    <!--        </select>-->
+    <!--      </div>-->
+
+    <!--      <div class="form-item">-->
+    <!--        <label>Hours:</label>-->
+    <!--        <input type="number"/>-->
+    <!--      </div>-->
+
+    <!--      <div class="form-item">-->
+    <!--        <label>Billable:</label>-->
+    <!--        <input class="check-box" type="checkbox"/>-->
+    <!--      </div>-->
+
+
+    <!--      <div class="button-section">-->
+    <!--        <button>Save</button>-->
+    <!--      </div>-->
+
+    <!--    </div>-->
+
+    <app-time-sheet-modal
+      [isOpen]="isModalOpen"
+      (close)="closeModal()"
+    />
+
+
+    <div class="stats-container">
+      <button (click)="openModal()">
+        <img src="add.png" />
+        <label>Add New Entry</label>
+      </button>
+
+      <div class="stats-items">
+        <div class="stats-item">
+          <label>Hours Logged</label>
+          <p>40</p>
+        </div>
+
+        <div class="stats-item">
+          <label>Leave Due</label>
+          <p>5 days 2 hours</p>
+        </div>
       </div>
 
     </div>
@@ -44,15 +72,38 @@
     <div class="table">
       <div class="new-entry-title">
         <h3>Logged Time</h3>
+
+        <div class="title-items">
+          <div class="title-item">
+            <label>From:</label>
+            <input type="date" />
+          </div>
+
+          <div class="title-item">
+            <label>To:</label>
+            <input type="date" />
+          </div>
+        </div>
       </div>
 
       <table>
         <thead>
         <tr>
-          <th class="text-column">Date</th>
-          <th class="text-column">Project</th>
-          <th class="text-column">Billable</th>
-          <th class="number-column">Hours</th>
+          <th class="text-column">
+            <div class="th-content"><label>Date</label> <img src="direction.png" /></div>
+          </th>
+          <th class="text-column">
+            <div class="th-content"><label>Project</label> <img src="direction.png" /></div>
+          </th>
+          <th class="text-column">
+            <div class="th-content"><label>Description</label> <img src="direction.png" /></div>
+          </th>
+          <th class="text-column">
+            <div class="th-content"><label>Billable</label> <img src="direction.png" /></div>
+          </th>
+          <th class="number-column">
+            <div class="th-content"><label>Hours</label> <img src="direction.png" /></div>
+          </th>
           <th></th>
         </tr>
         </thead>
@@ -61,6 +112,7 @@
             <tr>
               <td>{{ parseDate(entry.dateOfEntry) | date: "dd-MMM-yyyy" }}</td>
               <td>{{ entry.project?.name }}</td>
+              <td>{{ entry.description }}</td>
 
               @if (entry.billable) {
                 <td><label class="yes-data">YES</label></td>
