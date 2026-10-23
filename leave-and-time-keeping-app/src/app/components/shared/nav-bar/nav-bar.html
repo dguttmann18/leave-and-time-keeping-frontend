@@ -8,25 +8,26 @@
   <div class="button-group">
 
     <div class="button-group-section">
-      <div class="tab-section-heading">
-        <p (click)="goToCalendar()">Calendar</p>
+      <div class="tab-section-heading clickable-heading">
+        <div class="nav-item">
+          <img class="nav-item-img" src="calendar.png" />
+          <p (click)="goToCalendar()">Calendar</p>
+        </div>
       </div>
     </div>
 
     <div class="button-group-section">
-      <div class="tab-section-heading">
-        <p>Time Sheets</p>
+      <div class="tab-section-heading" (click)="toggleTimeSheetsExpanded()">
+        <div class="nav-item">
+          <img class="nav-item-img" src="timesheet.png" />
+          <p>Time Sheets</p>
+        </div>
 
         @if (this.timeSheetsExpanded) {
           <img
-            src="right.png"
-            (click)="toggleTimeSheetsExpanded()"
-          >
+            src="right.png">
         } @else {
-          <img
-            src="down.png"
-            (click)="toggleTimeSheetsExpanded()"
-          >
+          <img src="down.png">
         }
       </div>
 
@@ -51,19 +52,16 @@
 
 
     <div class="button-group-section">
-      <div class="tab-section-heading">
-        <p>Leave</p>
+      <div class="tab-section-heading" (click)="toggleLeaveExpanded()">
+        <div class="nav-item">
+          <img class="nav-item-img" src="leave.png" />
+          <p>Leaves</p>
+        </div>
 
         @if (this.leaveExpanded) {
-          <img
-            src="right.png"
-            (click)="toggleLeaveExpanded()"
-          >
+          <img src="right.png">
         } @else {
-          <img
-            src="down.png"
-            (click)="toggleLeaveExpanded()"
-          >
+          <img src="down.png">
         }
       </div>
 
