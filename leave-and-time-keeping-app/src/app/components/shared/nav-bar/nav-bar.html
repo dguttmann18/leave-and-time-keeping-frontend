@@ -8,7 +8,10 @@
   <div class="button-group">
 
     <div class="button-group-section">
-      <div class="tab-section-heading clickable-heading">
+      <div
+        class="tab-section-heading clickable-heading"
+        [ngClass]="{'active' : activePage === 'calendar'}"
+      >
         <div class="nav-item">
           <img class="nav-item-img" src="calendar.png" />
           <p (click)="goToCalendar()">Calendar</p>
@@ -25,9 +28,14 @@
 
         @if (this.timeSheetsExpanded) {
           <img
-            src="right.png">
+            src="down.png"
+            class="drop-down-img"
+          >
         } @else {
-          <img src="down.png">
+          <img
+            src="right.png"
+            class="drop-down-img"
+          >
         }
       </div>
 
@@ -55,13 +63,19 @@
       <div class="tab-section-heading" (click)="toggleLeaveExpanded()">
         <div class="nav-item">
           <img class="nav-item-img" src="leave.png" />
-          <p>Leaves</p>
+          <p>Leave</p>
         </div>
 
         @if (this.leaveExpanded) {
-          <img src="right.png">
+          <img
+            src="down.png"
+            class="drop-down-img"
+          >
         } @else {
-          <img src="down.png">
+          <img
+            src="right.png"
+            class="drop-down-img"
+          >
         }
       </div>
 

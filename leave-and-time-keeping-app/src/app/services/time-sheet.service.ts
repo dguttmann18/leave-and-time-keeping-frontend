@@ -22,18 +22,26 @@ export class TimeSheetService {
     const request: ProjectRequest = {
       name: project.name.trim(),
       client: project.client?.trim(),
-      description: project.description.trim(),
+      description: project.description?.trim(),
     };
 
     return this.http.post<void>(`${this.apiUrl}/project/new`, request);
   }
 
-  getAllActiveProjects(): Project[] {
-    return projects;
+  updateProject(project: ProjectRequest, id: number): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/project/update/${id}`, project);
   }
 
-  getAllActiveTimeSheetEntries() : TimeSheetEntry[] {
-    return timeSheets;
+  getAllActiveProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.apiUrl}/project/all`);
+  }
+
+  deleteProject(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/project/${id}`);
+  }
+
+  getAllActiveTimeSheetEntries() : Observable<TimeSheetEntry[]> {
+    return this.http.get<TimeSheetEntry[]>(`${this.apiUrl}/time_sheet_entry/all`);
   }
 
   getAllClients() : string[] {

@@ -108,7 +108,7 @@
         </tr>
         </thead>
         <tbody>
-          @for (entry of timeSheetEntries; track entry.id) {
+          @for (entry of timesheets(); track entry.id) {
             <tr>
               <td>{{ parseDate(entry.dateOfEntry) | date: "dd-MMM-yyyy" }}</td>
               <td>{{ entry.project?.name }}</td>

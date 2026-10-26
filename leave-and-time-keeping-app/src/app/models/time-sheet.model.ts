@@ -5,7 +5,7 @@ export interface Project {
   active?: boolean;
   client?: string;
   name: string;
-  description: string;
+  description?: string;
 }
 
 export type ProjectRequest = Pick<Project, 'name' | 'client' | 'description'>;

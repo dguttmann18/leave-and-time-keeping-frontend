@@ -12,8 +12,10 @@
     <div class="form-item">
       <label>Project:</label>
       <select>
-        @for (project of projects; track project.id) {
-          <option>{{ project.name }}</option>
+        @for (project of projects(); track project.id) {
+          @if (project.name && project.name.trim() !== '' ) {
+            <option>{{ project.name }}</option>
+          }
         }
       </select>
     </div>
@@ -34,7 +36,8 @@
     </div>
 
     <div class="button-section">
-      <button>Save</button>
+      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button class="save-btn">Save</button>
     </div>
 
   </div>

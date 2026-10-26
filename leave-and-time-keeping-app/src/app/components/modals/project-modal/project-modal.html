@@ -1,0 +1,49 @@
+<app-modal
+  [isOpen]="this.isOpen()"
+  title="Project"
+  (closeModal)="closeModal()"
+>
+  <form class="add-new-entry" [formGroup]="projectForm" (ngSubmit)="saveProject()" novalidate>
+    <div class="form-item">
+      <label>Project Name:</label>
+      <input name="name" formControlName="name" required />
+      @if (this.projectForm.controls['name'].invalid && this.projectForm.controls['name'].touched) {
+        <span class="field-error">Project name is required.</span>
+      }
+    </div>
+
+    <div class="form-item">
+      <label>Client:</label>
+      <input list="client-list" name="client" formControlName="client" required />
+      @if (this.projectForm.controls['client'].invalid && this.projectForm.controls['client'].touched) {
+        <span class="field-error">Client is required.</span>
+      }
+
+      <datalist id="client-list">
+        @for (client of clients; track $index) {
+          <option>{{ client }}</option>
+        }
+      </datalist>
+    </div>
+
+    <div class="form-item">
+      <label>Description:</label>
+      <input name="description" formControlName="description" required />
+      @if (this.projectForm.controls['description'].invalid && this.projectForm.controls['description'].touched) {
+        <span class="field-error">Description is required.</span>
+      }
+    </div>
+
+    @if (saveError()) {
+      <div class="form-item">
+        <span class="field-error">{{ saveError() }}</span>
+      </div>
+    }
+
+    <div class="button-section">
+      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button class="save-btn" type="submit">Save</button>
+    </div>
+
+  </form>
+</app-modal>

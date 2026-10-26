@@ -5,52 +5,72 @@
   </div>
 
   <div class="main-section">
-    <form class="add-new-entry" #projectForm="ngForm" (ngSubmit)="saveProject(projectForm)" novalidate>
-      <div class="new-entry-title">
-        <h3>Add New Project</h3>
-      </div>
+    <!--    <form class="add-new-entry" #projectForm="ngForm" (ngSubmit)="saveProject(projectForm)" novalidate>-->
+    <!--      <div class="new-entry-title">-->
+    <!--        <h3>Add New Project</h3>-->
+    <!--      </div>-->
 
-      <div class="form-item">
-        <label>Project Name:</label>
-        <input name="name" [(ngModel)]="newProject.name" #name="ngModel" required />
-        @if (name.invalid && name.touched) {
-          <span class="field-error">Project name is required.</span>
-        }
-      </div>
+    <!--      <div class="form-item">-->
+    <!--        <label>Project Name:</label>-->
+    <!--        <input name="name" [(ngModel)]="newProject.name" #name="ngModel" required />-->
+    <!--        @if (name.invalid && name.touched) {-->
+    <!--          <span class="field-error">Project name is required.</span>-->
+    <!--        }-->
+    <!--      </div>-->
 
-      <div class="form-item">
-        <label>Client:</label>
-        <input list="client-list" name="client" [(ngModel)]="newProject.client" #client="ngModel" required />
-        @if (client.invalid && client.touched) {
-          <span class="field-error">Client is required.</span>
-        }
+    <!--      <div class="form-item">-->
+    <!--        <label>Client:</label>-->
+    <!--        <input list="client-list" name="client" [(ngModel)]="newProject.client" #client="ngModel" required />-->
+    <!--        @if (client.invalid && client.touched) {-->
+    <!--          <span class="field-error">Client is required.</span>-->
+    <!--        }-->
 
-        <datalist id="client-list">
-          @for (client of clients; track $index) {
-            <option>{{ client }}</option>
-          }
-        </datalist>
-      </div>
+    <!--        <datalist id="client-list">-->
+    <!--          @for (client of clients; track $index) {-->
+    <!--            <option>{{ client }}</option>-->
+    <!--          }-->
+    <!--        </datalist>-->
+    <!--      </div>-->
 
-      <div class="form-item">
-        <label>Description:</label>
-        <input name="description" [(ngModel)]="newProject.description" #description="ngModel" required />
-        @if (description.invalid && description.touched) {
-          <span class="field-error">Description is required.</span>
-        }
-      </div>
+    <!--      <div class="form-item">-->
+    <!--        <label>Description:</label>-->
+    <!--        <input name="description" [(ngModel)]="newProject.description" #description="ngModel" required />-->
+    <!--        @if (description.invalid && description.touched) {-->
+    <!--          <span class="field-error">Description is required.</span>-->
+    <!--        }-->
+    <!--      </div>-->
 
-      @if (saveError()) {
-        <div class="form-item">
-          <span class="field-error">{{ saveError() }}</span>
-        </div>
-      }
+    <!--      @if (saveError()) {-->
+    <!--        <div class="form-item">-->
+    <!--          <span class="field-error">{{ saveError() }}</span>-->
+    <!--        </div>-->
+    <!--      }-->
 
-      <div class="button-section">
-        <button type="submit" [disabled]="saving()">{{ saving() ? 'Saving...' : 'Save' }}</button>
-      </div>
+    <!--      <div class="button-section">-->
+    <!--        <button type="submit" [disabled]="saving()">{{ saving() ? 'Saving...' : 'Save' }}</button>-->
+    <!--      </div>-->
 
-    </form>
+    <!--    </form>-->
+
+    <app-project-modal
+      [isOpen]="isModalOpen"
+      [data]="this.currentProject"
+      (close)="closeModal()"
+    />
+
+    <app-delete-project-modal
+      [isOpen]="isDeleteModalOpen"
+      [data]="this.currentProject"
+      (close)="closeDeleteModal()"
+    />
+
+    <div class="stats-container">
+      <button (click)="openModal()">
+        <img src="add.png" />
+        <label>Add New Project</label>
+      </button>
+
+    </div>
 
     <div class="table">
       <div class="new-entry-title">
@@ -76,7 +96,10 @@
               <td>{{ project.description }}</td>
               <td>{{ project.created | date: "dd-MMM-yyyy" }}</td>
               <td class="status-cell">{{ project.active ? 'ACTIVE' : 'INACTIVE' }}</td>
-              <td class="button-cell"><button>Edit</button><button>Delete</button></td>
+              <td class="button-cell">
+                <button (click)="openEditModal(project)">Edit</button>
+                <button (click)="openDeleteModal(project)">Delete</button>
+              </td>
             </tr>
           }
         </tbody>
