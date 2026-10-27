@@ -5,53 +5,6 @@
   </div>
 
   <div class="main-section">
-    <!--    <form class="add-new-entry" #projectForm="ngForm" (ngSubmit)="saveProject(projectForm)" novalidate>-->
-    <!--      <div class="new-entry-title">-->
-    <!--        <h3>Add New Project</h3>-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Project Name:</label>-->
-    <!--        <input name="name" [(ngModel)]="newProject.name" #name="ngModel" required />-->
-    <!--        @if (name.invalid && name.touched) {-->
-    <!--          <span class="field-error">Project name is required.</span>-->
-    <!--        }-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Client:</label>-->
-    <!--        <input list="client-list" name="client" [(ngModel)]="newProject.client" #client="ngModel" required />-->
-    <!--        @if (client.invalid && client.touched) {-->
-    <!--          <span class="field-error">Client is required.</span>-->
-    <!--        }-->
-
-    <!--        <datalist id="client-list">-->
-    <!--          @for (client of clients; track $index) {-->
-    <!--            <option>{{ client }}</option>-->
-    <!--          }-->
-    <!--        </datalist>-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Description:</label>-->
-    <!--        <input name="description" [(ngModel)]="newProject.description" #description="ngModel" required />-->
-    <!--        @if (description.invalid && description.touched) {-->
-    <!--          <span class="field-error">Description is required.</span>-->
-    <!--        }-->
-    <!--      </div>-->
-
-    <!--      @if (saveError()) {-->
-    <!--        <div class="form-item">-->
-    <!--          <span class="field-error">{{ saveError() }}</span>-->
-    <!--        </div>-->
-    <!--      }-->
-
-    <!--      <div class="button-section">-->
-    <!--        <button type="submit" [disabled]="saving()">{{ saving() ? 'Saving...' : 'Save' }}</button>-->
-    <!--      </div>-->
-
-    <!--    </form>-->
-
     <app-project-modal
       [isOpen]="isModalOpen"
       [data]="this.currentProject"
@@ -73,18 +26,24 @@
     </div>
 
     <div class="table">
-      <div class="new-entry-title">
-        <h3>Current Projects</h3>
-      </div>
-
       <table>
         <thead>
         <tr>
-          <th>Project Name</th>
-          <th>Client</th>
-          <th>Description</th>
-          <th>Dated Added</th>
-          <th class="status-cell">Status</th>
+          <th class="text-column">
+            <div class="th-content"><label>Project Name</label> <img src="direction.png" /></div>
+          </th>
+          <th class="text-column">
+            <div class="th-content"><label>Client</label> <img src="direction.png" /></div>
+          </th>
+          <th class="text-column">
+            <div class="th-content"><label>Description</label> <img src="direction.png" /></div>
+          </th>
+          <th class="text-column">
+            <div class="th-content"><label>Dated Added</label> <img src="direction.png" /></div>
+          </th>
+          <th class="number-column">
+            <div class="th-content status-cell"><label>Status</label> <img src="direction.png" /></div>
+          </th>
           <th></th>
         </tr>
         </thead>
@@ -95,10 +54,16 @@
               <td>{{ project.client }}</td>
               <td>{{ project.description }}</td>
               <td>{{ project.created | date: "dd-MMM-yyyy" }}</td>
-              <td class="status-cell">{{ project.active ? 'ACTIVE' : 'INACTIVE' }}</td>
+
+              @if (project.active) {
+                <td><label class="yes-data">ACTIVE</label></td>
+              } @else {
+                <td><label class="no-data">INACTIVE</label></td>
+              }
+<!--              <td class="status-cell">{{ project.active ? 'ACTIVE' : 'INACTIVE' }}</td>-->
               <td class="button-cell">
-                <button (click)="openEditModal(project)">Edit</button>
-                <button (click)="openDeleteModal(project)">Delete</button>
+                <button class="edit-btn" (click)="openEditModal(project)">Edit</button>
+                <button class="delete-btn" (click)="openDeleteModal(project)">Delete</button>
               </td>
             </tr>
           }

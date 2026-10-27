@@ -113,10 +113,13 @@ main {
 
   .save-btn {
     background-color: #06be06;
+    color: white;
   }
 
-  .save-button:hover {
-    background-color: green;
+  .save-btn:hover {
+    background-color: white;
+    color: #06be06;
+    border: solid #06be06 1px;
   }
 
   .delete-btn {
@@ -131,12 +134,12 @@ main {
   }
 
   .cancel-btn {
-    background-color: lightgrey;
+    background-color: white;
     border: solid lightgrey 1px;
   }
 
   .cancel-btn:hover {
-    background-color: white;
+    background-color: lightgrey;
   }
 }
 
