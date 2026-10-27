@@ -108,7 +108,7 @@
         </tr>
         </thead>
         <tbody>
-          @for (entry of timeSheetEntries; track entry.id) {
+          @for (entry of timesheets(); track entry.id) {
             <tr>
               <td>{{ parseDate(entry.dateOfEntry) | date: "dd-MMM-yyyy" }}</td>
               <td>{{ entry.project?.name }}</td>
@@ -122,8 +122,8 @@
 
               <td class="number-column">{{ entry.hours | number: '1.2-2' }}</td>
               <td class="button-cell">
-                <button>Edit</button>
-                <button>Delete</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
               </td>
             </tr>
           }

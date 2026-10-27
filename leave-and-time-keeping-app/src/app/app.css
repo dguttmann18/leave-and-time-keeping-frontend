@@ -39,7 +39,7 @@
 
 .title-section {
   border-bottom: lightgrey solid 1px;
-  width: calc(60vw);
+  width: calc(80vw);
   padding: 1rem 0;
   display: flex;
   flex-direction: row;
@@ -58,7 +58,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: calc(60vw);
+  width: calc(80vw);
 
   button {
     height: min-content;
@@ -225,10 +225,10 @@
   flex-direction: column;
   justify-content: start;
   border-radius: 10px;
-  width: calc(60vw);
+  width: calc(80vw);
   height: max-content;
   border: solid white 1px;
-  box-shadow: 8px 8px 24px 2px #e8e4f6;
+  /*box-shadow: 8px 8px 24px 2px #e8e4f6;*/
   margin-bottom: 1rem;
 
   table {
@@ -242,13 +242,14 @@
       border-bottom: solid lightgrey 1px;
 
       th {
-        /*text-align: start;*/
+        text-align: start;
         padding: 0.5rem;
 
         .th-content {
           display: flex;
           flex-direction: row;
-          align-items: center;
+          justify-content: start;
+          /*align-items: center;*/
           gap: 0.25rem;
         }
 
@@ -265,13 +266,14 @@
       cursor: pointer;
 
       td {
-        padding: 0.5rem;
+        padding: 1.5rem 0.5rem;
         /*width: fit-content;*/
       }
     }
 
     tbody tr:hover {
-      background-color: skyblue;
+      /*background-color: skyblue;*/
+      box-shadow: 8px 8px 24px 2px #e8e4f6;
     }
   }
 }
@@ -311,8 +313,30 @@ th.number-column .th-content {
   /*width: max-content;*/
 
   button {
-    padding: 0.1rem 0.5rem;
+    padding: 0.3rem 0.5rem;
     cursor: pointer;
+    border-radius: 5px;
   }
 }
 
+.edit-btn {
+  background-color: white;
+  color: orange;
+  border: solid orange 1px;
+}
+
+.edit-btn:hover {
+  background-color: orange;
+  color: white;
+}
+
+.delete-btn {
+  background-color: white;
+  color: red;
+  border: solid red 1px;
+}
+
+.delete-btn:hover {
+  color: white;
+  background-color: red;
+}

@@ -1,24 +1,24 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Project, ProjectRequest } from '../../../models/time-sheet.model';
 import { TimeSheetService } from '../../../services/time-sheet.service';
 import { DatePipe } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ProjectModal } from '../../modals/project-modal/project-modal';
+import { Project } from '../../../models/time-sheet.model';
+import { DeleteProjectModal } from '../../modals/delete-project-modal/delete-project-modal';
 
 @Component({
   selector: 'app-projects-page',
-  imports: [DatePipe, FormsModule],
+  imports: [DatePipe, FormsModule, ProjectModal, DeleteProjectModal],
   templateUrl: './projects-page.html',
-  styleUrl: './../../../app.css',
+  styleUrls: ['./../../../app.css'],
 })
 export class ProjectsPage implements OnInit {
   private timeSheetService = inject(TimeSheetService);
-
   projects = signal<Project[]>([]);
-  clients: string[] = this.timeSheetService.getAllClients();
 
-  newProject: ProjectRequest = { name: '', client: '', description: '' };
-  saving = signal(false);
-  saveError = signal<string | null>(null);
+  isModalOpen: boolean = false;
+  isDeleteModalOpen: boolean = false;
+  currentProject!: Project;
 
   addNewProjectModalOpen = signal(false);
 
@@ -33,27 +33,26 @@ export class ProjectsPage implements OnInit {
     });
   }
 
-  saveProject(form: NgForm) {
-    if (form.invalid || this.saving()) {
-      form.control.markAllAsTouched();
-      return;
-    }
+  openModal() {
+    this.isModalOpen = true;
+  }
 
-    this.saving.set(true);
-    this.saveError.set(null);
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
-    this.timeSheetService.addNewProject(this.newProject).subscribe({
-      next: () => {
-        form.resetForm({ name: '', client: '', description: '' });
-        this.saving.set(false);
-        this.loadProjects();
-      },
-      error: (err) => {
-        console.error('Failed to save project', err);
-        this.saveError.set('Could not save the project. Please try again.');
-        this.saving.set(false);
-      },
-    });
+  openDeleteModal(project: Project) {
+    this.isDeleteModalOpen = true;
+    this.currentProject = project;
+  }
+
+  closeDeleteModal() {
+    this.isDeleteModalOpen = false;
+  }
+
+  openEditModal(project: Project) {
+    this.currentProject = project;
+    this.openModal();
   }
 
   addNewProject() {
