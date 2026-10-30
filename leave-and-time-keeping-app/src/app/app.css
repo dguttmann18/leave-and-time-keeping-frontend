@@ -164,7 +164,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
 
   .title-items {
     display: flex;
@@ -217,6 +216,19 @@
 
 }
 
+.table-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+}
+
 .table {
   overflow: scroll;
   font-size: medium;
@@ -227,7 +239,7 @@
   border-radius: 10px;
   width: calc(80vw);
   height: max-content;
-  border: solid white 1px;
+  /*border: solid white 1px;*/
   /*box-shadow: 8px 8px 24px 2px #e8e4f6;*/
   margin-bottom: 1rem;
 
@@ -237,6 +249,7 @@
     font-size: smaller;
     border-collapse: collapse;
     box-shadow: 8px 8px 24px 2px #e8e4f6;
+    border-bottom: solid lightgrey 1px;
 
     thead tr {
       border-bottom: solid lightgrey 1px;

@@ -28,7 +28,7 @@
 
     <div class="form-item">
       <label>Description:</label>
-      <input name="description" formControlName="description" required />
+      <textarea name="description" formControlName="description" required></textarea>
       @if (this.projectForm.controls['description'].invalid && this.projectForm.controls['description'].touched) {
         <span class="field-error">Description is required.</span>
       }

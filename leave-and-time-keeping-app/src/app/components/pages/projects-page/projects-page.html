@@ -48,24 +48,31 @@
         </tr>
         </thead>
         <tbody>
-          @for (project of projects(); track project.id) {
-            <tr>
-              <td>{{ project.name }}</td>
-              <td>{{ project.client }}</td>
-              <td>{{ project.description }}</td>
-              <td>{{ project.created | date: "dd-MMM-yyyy" }}</td>
+          @if (projects().length === 0) {
+              <div class="table-empty">
+                <img src="empty.png"/>
+                <span>No records to display</span>
+              </div>
+          } @else {
+            @for (project of projects(); track project.id) {
+              <tr>
+                <td>{{ project.name }}</td>
+                <td>{{ project.client }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.created | date: "dd-MMM-yyyy" }}</td>
 
-              @if (project.active) {
-                <td><label class="yes-data">ACTIVE</label></td>
-              } @else {
-                <td><label class="no-data">INACTIVE</label></td>
-              }
-<!--              <td class="status-cell">{{ project.active ? 'ACTIVE' : 'INACTIVE' }}</td>-->
-              <td class="button-cell">
-                <button class="edit-btn" (click)="openEditModal(project)">Edit</button>
-                <button class="delete-btn" (click)="openDeleteModal(project)">Delete</button>
-              </td>
-            </tr>
+                @if (project.active) {
+                  <td><label class="yes-data">ACTIVE</label></td>
+                } @else {
+                  <td><label class="no-data">INACTIVE</label></td>
+                }
+
+                <td class="button-cell">
+                  <button class="edit-btn" (click)="openEditModal(project)">Edit</button>
+                  <button class="delete-btn" (click)="openDeleteModal(project)">Delete</button>
+                </td>
+              </tr>
+            }
           }
         </tbody>
       </table>

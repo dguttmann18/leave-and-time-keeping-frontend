@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProjectModal } from '../../modals/project-modal/project-modal';
 import { Project } from '../../../models/time-sheet.model';
 import { DeleteProjectModal } from '../../modals/delete-project-modal/delete-project-modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects-page',
@@ -14,13 +15,15 @@ import { DeleteProjectModal } from '../../modals/delete-project-modal/delete-pro
 })
 export class ProjectsPage implements OnInit {
   private timeSheetService = inject(TimeSheetService);
-  projects = signal<Project[]>([]);
+  private router = inject(Router);
 
   isModalOpen: boolean = false;
+
   isDeleteModalOpen: boolean = false;
   currentProject!: Project;
 
   addNewProjectModalOpen = signal(false);
+  projects = signal<Project[]>([]);
 
   ngOnInit() {
     this.loadProjects();
@@ -33,11 +36,19 @@ export class ProjectsPage implements OnInit {
     });
   }
 
+  softRefresh() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   openModal() {
     this.isModalOpen = true;
   }
 
   closeModal() {
+    this.softRefresh();
     this.isModalOpen = false;
   }
 
@@ -48,6 +59,7 @@ export class ProjectsPage implements OnInit {
 
   closeDeleteModal() {
     this.isDeleteModalOpen = false;
+    this.softRefresh();
   }
 
   openEditModal(project: Project) {
