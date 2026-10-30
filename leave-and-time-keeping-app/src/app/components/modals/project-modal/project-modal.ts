@@ -6,9 +6,9 @@ import { Project, ProjectRequest } from '../../../models/time-sheet.model';
 
 @Component({
   selector: 'app-project-modal',
-  imports: [ Modal, ReactiveFormsModule, FormsModule ],
+  imports: [Modal, ReactiveFormsModule, FormsModule],
   templateUrl: './project-modal.html',
-  styleUrls: [ './../../shared/modal/modal.css' ]
+  styleUrls: ['./../../shared/modal/modal.css'],
 })
 export class ProjectModal implements OnInit {
   private timeSheetService = inject(TimeSheetService);
@@ -23,8 +23,6 @@ export class ProjectModal implements OnInit {
   isOpen = input.required<boolean>();
   close = output<void>();
 
-
-
   // protected readonly projects = projects;
   protected readonly Date = Date;
 
@@ -35,7 +33,7 @@ export class ProjectModal implements OnInit {
         this.projectForm.patchValue({
           name: project.name,
           client: project.client,
-          description: project.description
+          description: project.description,
         });
       } else {
         this.projectForm.reset();
@@ -48,13 +46,15 @@ export class ProjectModal implements OnInit {
     this.setupProjectForm();
   }
 
+
+
   setupProjectForm() {
     this.projectForm = new FormGroup({
       client: new FormControl(this.data()?.client),
       name: new FormControl(this.data()?.name),
-      description: new FormControl(this.data()?.description)
+      description: new FormControl(this.data()?.description),
     });
-}
+  }
 
   formToDto(): ProjectRequest {
     const { name, client, description } = this.projectForm.value;
@@ -62,7 +62,7 @@ export class ProjectModal implements OnInit {
     return {
       name: name ?? '',
       client: client ?? undefined,
-      description: description ?? undefined
+      description: description ?? undefined,
     };
   }
 
@@ -83,7 +83,7 @@ export class ProjectModal implements OnInit {
     const id = this.data()?.id;
 
     const request$ = id
-    ? this.timeSheetService.updateProject(dto, id)
+      ? this.timeSheetService.updateProject(dto, id)
       : this.timeSheetService.addNewProject(dto);
 
     request$.subscribe({
@@ -96,14 +96,14 @@ export class ProjectModal implements OnInit {
         console.error('Failed to save project', err);
         this.saveError.set('Could not save the project. Please try again.');
         this.saving.set(false);
-      }
-    })
+      },
+    });
   }
 
   loadProjects() {
     this.timeSheetService.getAllProjects().subscribe({
       next: (projects) => this.projects.set(projects),
-      error: (err) => console.error('Failed to load projects', err)
+      error: (err) => console.error('Failed to load projects', err),
     });
   }
 }

@@ -5,52 +5,20 @@
   </div>
 
   <div class="main-section">
-
-
-    <!--    <div class="add-new-entry">-->
-    <!--      <div class="new-entry-title">-->
-    <!--        <h3>New Entry</h3>-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Date:</label>-->
-    <!--        <input type="date" [defaultValue]="Date()"/>-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Project:</label>-->
-    <!--        <select>-->
-    <!--          @for (project of projects; track project.id) {-->
-    <!--            <option>{{ project.name }}</option>-->
-    <!--          }-->
-    <!--        </select>-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Hours:</label>-->
-    <!--        <input type="number"/>-->
-    <!--      </div>-->
-
-    <!--      <div class="form-item">-->
-    <!--        <label>Billable:</label>-->
-    <!--        <input class="check-box" type="checkbox"/>-->
-    <!--      </div>-->
-
-
-    <!--      <div class="button-section">-->
-    <!--        <button>Save</button>-->
-    <!--      </div>-->
-
-    <!--    </div>-->
-
     <app-time-sheet-modal
       [isOpen]="isModalOpen"
+      [data]="currentTimeSheetEntry"
       (close)="closeModal()"
     />
 
+    <app-delete-time-sheet-modal
+      [isOpen]="isDeleteModalOpen"
+      [data]="this.currentTimeSheetEntry"
+      (close)="closeDeleteModal()"
+    />
 
     <div class="stats-container">
-      <button (click)="openModal()">
+      <button (click)="openAddModal()">
         <img src="add.png" />
         <label>Add New Entry</label>
       </button>
@@ -122,8 +90,8 @@
 
               <td class="number-column">{{ entry.hours | number: '1.2-2' }}</td>
               <td class="button-cell">
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
+                <button class="edit-btn" (click)="openEditModal(entry)">Edit</button>
+                <button class="delete-btn" (click)="openDeleteModal(entry)">Delete</button>
               </td>
             </tr>
           }

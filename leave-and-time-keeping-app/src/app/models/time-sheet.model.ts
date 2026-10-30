@@ -21,3 +21,11 @@ export interface TimeSheetEntry {
   billable?: boolean;
   description?: string;
 }
+
+export interface TimeSheetEntryRequest {
+  dateOfEntry: string;
+  projectId: number;
+  hours: number;
+  billable: boolean;
+  description: string;
+}

@@ -4,7 +4,11 @@
   (closeModal)="closeModal()"
 >
   <div class="question-container">
-    <span>{{ 'Are you sure you want to delete the project: ' + this.data()?.name }}</span>
+    <span>Are you sure you want to delete the project</span>
+
+    @if(this.data()) {
+      <span>: {{this.data().name}}</span>
+    }
   </div>
 
   <div class="button-section">

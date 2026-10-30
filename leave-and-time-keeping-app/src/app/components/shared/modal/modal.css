@@ -75,6 +75,7 @@ main {
     border-radius: 5px;
     border: solid lightgrey 1px;
     font-family: Arial, serif;
+    font-size: small;
   }
 
   textarea {

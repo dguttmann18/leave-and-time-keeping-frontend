@@ -1,29 +1,40 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { projects, timeSheets } from '../../../data/time-sheet.data';
 import { DateService } from '../../../services/date.service';
-import { Modal } from '../../shared/modal/modal';
 import { TimeSheetModal } from '../../modals/time-sheet-modal/time-sheet-modal';
 import { TimeSheetService } from '../../../services/time-sheet.service';
-import { TimeSheetEntry } from '../../../models/time-sheet.model';
+import { Project, TimeSheetEntry } from '../../../models/time-sheet.model';
+import { DeleteProjectModal } from '../../modals/delete-project-modal/delete-project-modal';
+import { DeleteTimeSheetModal } from '../../modals/delete-time-sheet-modal/delete-time-sheet-modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-time-sheet-page',
-  imports: [DatePipe, ReactiveFormsModule, DecimalPipe, Modal, TimeSheetModal],
+  imports: [
+    DatePipe,
+    ReactiveFormsModule,
+    DecimalPipe,
+    TimeSheetModal,
+    DeleteProjectModal,
+    DeleteTimeSheetModal,
+  ],
   templateUrl: './time-sheet-page.html',
-  styleUrls: ['./../../../app.css']
+  styleUrls: ['./../../../app.css'],
 })
 export class TimeSheetPage implements OnInit {
-  private timeSheetService = inject(TimeSheetService);
-  timesheets = signal<TimeSheetEntry[]>([]);
-
-  protected readonly projects = projects;
-  // protected readonly timeSheetEntries = timeSheets;
-  // protected readonly timeSheetEntries = ;
   private dateService = inject(DateService);
+  private timeSheetService = inject(TimeSheetService);
+  private router = inject(Router);
 
+  protected readonly Date = Date;
+
+  timesheets = signal<TimeSheetEntry[]>([]);
+  projects = signal<Project[]>([]);
   isModalOpen: boolean = false;
+  isDeleteModalOpen: boolean = false;
+  currentTimeSheetEntry?: TimeSheetEntry;
+  addNewTimeSheetModalOpen = signal(false);
 
   ngOnInit() {
     this.loadTimeSheets();
@@ -36,17 +47,51 @@ export class TimeSheetPage implements OnInit {
     });
   }
 
+  softRefresh() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   openModal() {
     this.isModalOpen = true;
   }
 
+  openAddModal() {
+    this.currentTimeSheetEntry = undefined;
+    this.openModal();
+  }
+
   closeModal() {
     this.isModalOpen = false;
+    this.softRefresh();
+  }
+
+  openDeleteModal(timeSheetEntry: TimeSheetEntry) {
+    this.isDeleteModalOpen = true;
+    this.currentTimeSheetEntry = timeSheetEntry;
+  }
+
+  closeDeleteModal() {
+    this.isDeleteModalOpen = false;
+    this.softRefresh();
+  }
+
+  openEditModal(timeSheetEntry: TimeSheetEntry) {
+    this.currentTimeSheetEntry = timeSheetEntry;
+    this.openModal();
   }
 
   parseDate(dateStr: string): Date {
     return this.dateService.parseDate(dateStr);
   }
 
-  protected readonly Date = Date;
+  addNewTimeSheetEntry() {
+    this.addNewTimeSheetModalOpen.set(true);
+  }
+
+  closeNewTimeSheetModal() {
+    this.addNewTimeSheetModalOpen.set(false);
+  }
 }
