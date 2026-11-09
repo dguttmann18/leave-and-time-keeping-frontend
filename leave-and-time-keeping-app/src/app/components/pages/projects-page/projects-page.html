@@ -22,7 +22,6 @@
         <img src="add.png" />
         <label>Add New Project</label>
       </button>
-
     </div>
 
     <div class="table">
@@ -47,13 +46,18 @@
           <th></th>
         </tr>
         </thead>
-        <tbody>
-          @if (projects().length === 0) {
+
+        @if (projects().length === 0) {
+          <tr class="empty-row">
+            <td colspan="7">
               <div class="table-empty">
-                <img src="empty.png"/>
+                <img src="empty.png" />
                 <span>No records to display</span>
               </div>
-          } @else {
+            </td>
+          </tr>
+        } @else {
+          <tbody>
             @for (project of projects(); track project.id) {
               <tr>
                 <td>{{ project.name }}</td>
@@ -73,8 +77,9 @@
                 </td>
               </tr>
             }
-          }
-        </tbody>
+          </tbody>
+        }
+
       </table>
     </div>
   </div>
