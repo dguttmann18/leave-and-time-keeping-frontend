@@ -4,45 +4,41 @@
   (closeModal)="closeModal()"
 >
   <form class="add-new-entry" [formGroup]="leaveForm" (ngSubmit)="saveLeaveApplication()" novalidate>
-<!--    <div class="new-entry-title">-->
-<!--      <h3>Apply for Leave</h3>-->
-<!--    </div>-->
-
     <div class="form-item">
       <label>First Day:</label>
-      <input type="date" [defaultValue]="Date()" />
+      <input type="date" [defaultValue]="Date()" formControlName="firstDay" />
     </div>
 
     <div class="form-item">
       <label>Last Day:</label>
-      <input type="date" [defaultValue]="Date()" />
+      <input type="date" [defaultValue]="Date()" formControlName="lastDay" />
     </div>
 
     <div class="form-item">
       <label>Leave Type:</label>
-      <select>
-        <option>Annual</option>
-        <option>Sick</option>
-        <option>Study</option>
-        <option>Family Responsibility</option>
-        <option>Special</option>
-        <option>Unpaid</option>
+      <select formControlName="leaveType">
+        <option value="ANNUAL">Annual</option>
+        <option value="SICK">Sick</option>
+        <option value="STUDY">Study</option>
+        <option value="FAMILY_RESPONSIBILITY">Family Responsibility</option>
+        <option value="SPECIAL">Special</option>
+        <option value="UNPAID">Unpaid</option>
       </select>
     </div>
 
     <div class="form-item">
       <label>Partial:</label>
-      <input class="check-box" type="checkbox" />
+      <input class="check-box" type="checkbox" formControlName="isPartial" />
     </div>
 
     <div class="form-item">
       <label>Hours:</label>
-      <input type="number" />
+      <input type="number" formControlName="hours" />
     </div>
 
     <div class="form-item">
       <label>Description:</label>
-      <textarea></textarea>
+      <textarea formControlName="description"></textarea>
     </div>
 
     <div class="button-section">

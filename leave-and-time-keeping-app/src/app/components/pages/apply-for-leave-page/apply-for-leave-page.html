@@ -22,6 +22,18 @@
         <img src="add.png" />
         <label>Apply for Leave</label>
       </button>
+
+      <div class="stats-items">
+        <div class="stats-item">
+          <label>Leave Taken</label>
+          <p>{{ this.leaveTaken() }}</p>
+        </div>
+
+        <div class="stats-item">
+          <label>Leave Due</label>
+          <p>{{ this.leaveDue() }}</p>
+        </div>
+      </div>
     </div>
 
     <div class="table">
@@ -41,11 +53,11 @@
             <div class="th-content"><label>Partial</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content number-column"><label>Hours</label> <img src="direction.png" /></div>
-          </th>
-          <th class="text-column">
             <div class="th-content"><label>Description</label> <img src="direction.png" /></div>
           </th>
+          <th class="text-column hours-column">
+          <div class="th-content number-column"><label>Hours</label> <img src="direction.png" /></div>
+        </th>
           <th></th>
         </tr>
         </thead>
@@ -72,8 +84,13 @@
                   <td><label class="no-data">NO</label></td>
                 }
 
-                <td class="number-column">{{ leave.hours }}</td>
                 <td>{{ leave.description }}</td>
+
+                @if (leave.hours) {
+                  <td class="number-column">{{ leave.hours }}</td>
+                } @else {
+                  <td class="number-column">-</td>
+                }
 
                 <td class="button-cell">
                   <button class="edit-btn" (click)="openEditModal(leave)">Edit</button>

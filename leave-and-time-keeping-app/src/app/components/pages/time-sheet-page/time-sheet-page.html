@@ -26,12 +26,12 @@
       <div class="stats-items">
         <div class="stats-item">
           <label>Hours Logged</label>
-          <p>40</p>
+          <p>{{ this.hoursLogged() }}</p>
         </div>
 
         <div class="stats-item">
           <label>Leave Due</label>
-          <p>5 days 2 hours</p>
+          <p>{{ this.leaveDue() }}</p>
         </div>
       </div>
 
@@ -67,7 +67,7 @@
           <th class="text-column">
             <div class="th-content"><label>Billable</label> <img src="direction.png" /></div>
           </th>
-          <th class="number-column">
+          <th class="hours-column">
             <div class="th-content"><label>Hours</label> <img src="direction.png" /></div>
           </th>
           <th></th>

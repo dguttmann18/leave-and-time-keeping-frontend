@@ -226,12 +226,9 @@
   border-radius: 10px;
   width: calc(80vw);
   height: max-content;
-  /*border: solid white 1px;*/
-  /*box-shadow: 8px 8px 24px 2px #e8e4f6;*/
   margin-bottom: 1rem;
 
   table {
-    /*background-color: lightgrey;*/
     background-color: white;
     font-size: smaller;
     border-collapse: collapse;
@@ -267,7 +264,7 @@
     }
 
     .empty-row:hover {
-      background-color: none;
+      background: none;
     }
 
     .table-empty {
@@ -299,6 +296,11 @@
       box-shadow: 8px 8px 24px 2px #e8e4f6;
     }
   }
+}
+
+.hours-column {
+  width: 1%;
+  white-space: nowrap;
 }
 
 .number-column,

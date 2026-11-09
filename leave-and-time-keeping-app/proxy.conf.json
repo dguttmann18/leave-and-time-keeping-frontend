@@ -1,6 +1,16 @@
 {
-  "/api": {
+  "/api/time_sheet_entry": {
     "target": "http://localhost:8092",
+    "secure": false
+  },
+
+  "/api/project": {
+    "target": "http://localhost:8092",
+    "secure": false
+  },
+
+  "/api/leave_application": {
+    "target": "http://localhost:8091",
     "secure": false
   }
 }
