@@ -24,7 +24,8 @@ export class ApplyForLeavePage implements OnInit {
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
   currentLeaveApplication!: LeaveApplication;
-
+  leaveDue = signal(0);
+  leaveTaken = signal(0);
   addNewLeaveApplicationModalOpen = signal(false);
   leaveApplications = signal<LeaveApplication[]>([]);
 
@@ -34,9 +35,30 @@ export class ApplyForLeavePage implements OnInit {
 
   loadLeaveApplications() {
     this.leaveService.getAllLeaveApplications().subscribe({
-      next: (leaveApplications) => this.leaveApplications.set(leaveApplications),
+      next: (leaveApplications) => {
+        this.leaveApplications.set(leaveApplications);
+        this.getLeaveHoursDue();
+        this.calculateLeaveHoursTaken();
+      },
       error: (err) => console.error('Failed to load leave applications', err),
     });
+  }
+
+  getLeaveHoursDue() {
+    this.leaveService.getLeaveDue().subscribe({
+      next: (hours) => {
+        this.leaveDue.set(hours);
+      },
+      error: (err) => console.error('Failed to load leave due', err)
+    });
+  }
+
+  calculateLeaveHoursTaken() {
+    let hours: number = 0;
+    this.leaveApplications().forEach((application) => {
+      hours += application.hours ? application.hours : 0;
+    });
+    this.leaveTaken.set(hours);
   }
 
   softRefresh() {

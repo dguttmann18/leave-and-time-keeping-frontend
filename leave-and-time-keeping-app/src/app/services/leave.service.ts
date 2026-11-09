@@ -34,4 +34,8 @@ export class LeaveService {
   deleteLeaveApplication(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/leave_application/${id}`);
   }
+
+  getLeaveDue(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/leave_due`);
+  }
 }

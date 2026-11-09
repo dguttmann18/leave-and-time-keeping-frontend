@@ -19,7 +19,7 @@ export class LeaveModal implements OnInit {
   close = output<void>();
   saving = signal(false);
   saveError = signal<string | null>(null);
-  leaveForm!: FormGroup;
+  leaveForm: FormGroup = this.setupLeaveForm();
 
   constructor() {
     effect(() => {
@@ -42,7 +42,7 @@ export class LeaveModal implements OnInit {
   ngOnInit() {}
 
   setupLeaveForm() {
-    this.leaveForm = new FormGroup({
+    return new FormGroup({
       firstDay: new FormControl(this.data()?.firstDay),
       lastDay: new FormControl(this.data()?.lastDay),
       isPartial: new FormControl(this.data()?.isPartial),

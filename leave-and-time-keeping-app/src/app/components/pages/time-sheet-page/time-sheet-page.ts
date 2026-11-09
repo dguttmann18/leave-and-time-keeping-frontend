@@ -8,6 +8,8 @@ import { Project, TimeSheetEntry } from '../../../models/time-sheet.model';
 import { DeleteProjectModal } from '../../modals/delete-project-modal/delete-project-modal';
 import { DeleteTimeSheetModal } from '../../modals/delete-time-sheet-modal/delete-time-sheet-modal';
 import { Router } from '@angular/router';
+import { LeaveService } from '../../../services/leave.service';
+import { timeSheets } from '../../../data/time-sheet.data';
 
 @Component({
   selector: 'app-time-sheet-page',
@@ -25,12 +27,15 @@ import { Router } from '@angular/router';
 export class TimeSheetPage implements OnInit {
   private dateService = inject(DateService);
   private timeSheetService = inject(TimeSheetService);
+  private leaveService = inject(LeaveService);
   private router = inject(Router);
 
   protected readonly Date = Date;
 
   timesheets = signal<TimeSheetEntry[]>([]);
   projects = signal<Project[]>([]);
+  leaveDue = signal(0);
+  hoursLogged = signal(0);
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
   currentTimeSheetEntry?: TimeSheetEntry;
@@ -40,11 +45,30 @@ export class TimeSheetPage implements OnInit {
     this.loadTimeSheets();
   }
 
+  getLeaveHoursDue() {
+    this.leaveService.getLeaveDue().subscribe({
+      next: (hours) => this.leaveDue.set(hours),
+      error: (err) => console.error('Failed to load leave due', err)
+    });
+  }
+
   loadTimeSheets() {
     this.timeSheetService.getAllActiveTimeSheetEntries().subscribe({
-      next: (timesheets) => this.timesheets.set(timesheets),
+      next: (timesheets) => {
+        this.timesheets.set(timesheets);
+        this.getLeaveHoursDue();
+        this.calculateHoursLogged();
+      },
       error: (err) => console.error('Failed to load timesheets', err),
     });
+  }
+
+  calculateHoursLogged() {
+    let hours: number = 0;
+    this.timesheets().forEach((entry) => {
+      hours += entry.hours;
+    });
+    this.hoursLogged.set(hours);
   }
 
   softRefresh() {
