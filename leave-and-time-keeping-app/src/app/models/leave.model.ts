@@ -13,7 +13,16 @@ export interface LeaveApplication {
   firstDay: string;
   lastDay: string;
   isPartial: boolean;
-  hours: number;
+  hours?: number;
+  leaveType: LeaveType;
+  description: string;
+}
+
+export interface LeaveApplicationRequest {
+  firstDay: string;
+  lastDay: string;
+  isPartial: boolean;
+  hours?: number;
   leaveType: LeaveType;
   description: string;
 }

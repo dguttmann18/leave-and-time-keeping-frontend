@@ -46,8 +46,6 @@ export class ProjectModal implements OnInit {
     this.setupProjectForm();
   }
 
-
-
   setupProjectForm() {
     this.projectForm = new FormGroup({
       client: new FormControl(this.data()?.client),
