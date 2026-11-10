@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LeaveApplication, LeaveApplicationRequest } from '../models/leave.model';
+import { LeaveApplication, LeaveApplicationRequest, LeaveDue } from '../models/leave.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class LeaveService {
     return this.http.delete<void>(`${this.apiUrl}/leave_application/${id}`);
   }
 
-  getLeaveDue(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/leave_due`);
+  getLeaveDue(): Observable<LeaveDue> {
+    return this.http.get<LeaveDue>(`${this.apiUrl}/leave_due`);
   }
 }

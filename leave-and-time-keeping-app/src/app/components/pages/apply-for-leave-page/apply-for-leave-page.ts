@@ -6,7 +6,7 @@ import { LeaveModal } from '../../modals/leave-modal/leave-modal';
 import { DeleteLeaveModal } from '../../modals/delete-leave-modal/delete-leave-modal';
 import { LeaveService } from '../../../services/leave.service';
 import { Router } from '@angular/router';
-import { LeaveApplication } from '../../../models/leave.model';
+import { LeaveApplication, LeaveDue } from '../../../models/leave.model';
 
 @Component({
   selector: 'app-apply-for-leave-page',
@@ -24,7 +24,7 @@ export class ApplyForLeavePage implements OnInit {
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
   currentLeaveApplication!: LeaveApplication;
-  leaveDue = signal(0);
+  leaveDue = signal<LeaveDue>({days: 0, hours: 0});
   leaveTaken = signal(0);
   addNewLeaveApplicationModalOpen = signal(false);
   leaveApplications = signal<LeaveApplication[]>([]);
