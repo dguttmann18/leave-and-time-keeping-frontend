@@ -14,10 +14,20 @@ export class DateService {
   }
 
   today(): string {
-    const now = new Date();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
+    return this.formatDate(new Date());
+  }
 
-    return `${now.getFullYear()}-${month}-${day}`
+  formatDate(date: Date) {
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${date.getFullYear()}-${month}-${day}`
+  }
+
+  currentWeek(): { monday: string; sunday: string } {
+    const now = new Date();
+    const daysSinceMonday = (now.getDay() + 6) % 7;
+    const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate()  - daysSinceMonday);
+    const sunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6);
+    return { monday: this.formatDate(monday), sunday: this.formatDate(sunday) };
   }
 }
