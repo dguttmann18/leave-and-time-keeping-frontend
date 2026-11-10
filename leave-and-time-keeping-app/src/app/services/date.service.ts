@@ -10,7 +10,7 @@ export class DateService {
     const month = parseInt(dateStr.substring(5, 7), 10);
     const day = parseInt(dateStr.substring(8, 10), 10);
 
-    return new Date(year, month, day);
+    return new Date(year, month-1, day);
   }
 
   today(): string {

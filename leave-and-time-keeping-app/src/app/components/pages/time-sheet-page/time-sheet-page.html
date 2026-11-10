@@ -39,17 +39,29 @@
 
     <div class="table">
       <div class="new-entry-title">
-        <div class="title-items">
+        <form class="title-items" [formGroup]="dateRangeForm">
           <div class="title-item">
             <label>From:</label>
-            <input type="date" />
+            <input
+              type="date"
+              formControlName="firstDay"
+              (change)="updateDateRange()"
+            />
           </div>
 
           <div class="title-item">
             <label>To:</label>
-            <input type="date" />
+            <input
+              type="date"
+              formControlName="lastDay"
+              [min]="firstDay"
+              (change)="updateDateRange()"
+            />
+            @if (dateRangeForm.hasError('dateRange')) {
+              <span class="field-error">To date cannot be before From date</span>
+            }
           </div>
-        </div>
+        </form>
       </div>
 
       <table>
