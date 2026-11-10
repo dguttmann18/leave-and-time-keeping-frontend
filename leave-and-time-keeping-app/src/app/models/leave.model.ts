@@ -27,3 +27,8 @@ export interface LeaveApplicationRequest {
   leaveType: LeaveType;
   description: string;
 }
+
+export interface LeaveDue {
+  days: number;
+  hours: number;
+}

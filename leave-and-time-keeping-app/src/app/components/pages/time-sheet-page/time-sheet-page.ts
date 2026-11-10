@@ -10,6 +10,7 @@ import { DeleteTimeSheetModal } from '../../modals/delete-time-sheet-modal/delet
 import { Router } from '@angular/router';
 import { LeaveService } from '../../../services/leave.service';
 import { timeSheets } from '../../../data/time-sheet.data';
+import { LeaveDue } from '../../../models/leave.model';
 
 @Component({
   selector: 'app-time-sheet-page',
@@ -34,7 +35,7 @@ export class TimeSheetPage implements OnInit {
 
   timesheets = signal<TimeSheetEntry[]>([]);
   projects = signal<Project[]>([]);
-  leaveDue = signal(0);
+  leaveDue= signal<LeaveDue>({days: 0, hours: 0});
   hoursLogged = signal(0);
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
@@ -47,7 +48,7 @@ export class TimeSheetPage implements OnInit {
 
   getLeaveHoursDue() {
     this.leaveService.getLeaveDue().subscribe({
-      next: (hours) => this.leaveDue.set(hours),
+      next: (leave) => this.leaveDue.set(leave),
       error: (err) => console.error('Failed to load leave due', err)
     });
   }
