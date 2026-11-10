@@ -37,7 +37,8 @@ export class TimeSheetPage implements OnInit {
   currentTimeSheetEntry?: TimeSheetEntry;
 
   ngOnInit() {
-    this.loadTimeSheets();
+    this.reloadTimeSheets();
+    this.getLeaveHoursDue();
 
     this.dateRangeForm.controls.firstDay.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -68,10 +69,12 @@ export class TimeSheetPage implements OnInit {
   }
 
   setupDateRangeForm() {
+    const { monday, sunday } = this.dateService.currentWeek();
+
     return new FormGroup(
       {
-        firstDay: new FormControl<string | null>(null, Validators.required),
-        lastDay: new FormControl<string | null>(null, Validators.required),
+        firstDay: new FormControl<string | null>(monday, Validators.required),
+        lastDay: new FormControl<string | null>(sunday, Validators.required),
       },
       { validators: dateRangeValidator },
     );
