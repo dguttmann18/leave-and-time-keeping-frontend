@@ -1,27 +1,20 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DateService } from '../../../services/date.service';
 import { TimeSheetModal } from '../../modals/time-sheet-modal/time-sheet-modal';
 import { TimeSheetService } from '../../../services/time-sheet.service';
 import { Project, TimeSheetEntry } from '../../../models/time-sheet.model';
-import { DeleteProjectModal } from '../../modals/delete-project-modal/delete-project-modal';
 import { DeleteTimeSheetModal } from '../../modals/delete-time-sheet-modal/delete-time-sheet-modal';
 import { Router } from '@angular/router';
 import { LeaveService } from '../../../services/leave.service';
-import { timeSheets } from '../../../data/time-sheet.data';
 import { LeaveDue } from '../../../models/leave.model';
+import { dateRangeValidator } from '../../../validators/date-range.validator';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-time-sheet-page',
-  imports: [
-    DatePipe,
-    ReactiveFormsModule,
-    DecimalPipe,
-    TimeSheetModal,
-    DeleteProjectModal,
-    DeleteTimeSheetModal,
-  ],
+  imports: [DatePipe, ReactiveFormsModule, DecimalPipe, TimeSheetModal, DeleteTimeSheetModal],
   templateUrl: './time-sheet-page.html',
   styleUrls: ['./../../../app.css'],
 })
@@ -30,26 +23,36 @@ export class TimeSheetPage implements OnInit {
   private timeSheetService = inject(TimeSheetService);
   private leaveService = inject(LeaveService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   protected readonly Date = Date;
 
   timesheets = signal<TimeSheetEntry[]>([]);
   projects = signal<Project[]>([]);
-  leaveDue= signal<LeaveDue>({days: 0, hours: 0});
+  leaveDue = signal<LeaveDue>({ days: 0, hours: 0 });
   hoursLogged = signal(0);
+  dateRangeForm = this.setupDateRangeForm();
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
   currentTimeSheetEntry?: TimeSheetEntry;
-  addNewTimeSheetModalOpen = signal(false);
 
   ngOnInit() {
     this.loadTimeSheets();
+
+    this.dateRangeForm.controls.firstDay.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((first) => {
+      const last = this.dateRangeForm.controls.lastDay.value;
+      if (first && last && last < first) {
+        this.dateRangeForm.controls.lastDay.setValue(null);
+      }
+    });
   }
 
   getLeaveHoursDue() {
     this.leaveService.getLeaveDue().subscribe({
       next: (leave) => this.leaveDue.set(leave),
-      error: (err) => console.error('Failed to load leave due', err)
+      error: (err) => console.error('Failed to load leave due', err),
     });
   }
 
@@ -62,6 +65,16 @@ export class TimeSheetPage implements OnInit {
       },
       error: (err) => console.error('Failed to load timesheets', err),
     });
+  }
+
+  setupDateRangeForm() {
+    return new FormGroup(
+      {
+        firstDay: new FormControl<string | null>(null, Validators.required),
+        lastDay: new FormControl<string | null>(null, Validators.required),
+      },
+      { validators: dateRangeValidator },
+    );
   }
 
   calculateHoursLogged() {
@@ -90,7 +103,7 @@ export class TimeSheetPage implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
-    this.softRefresh();
+    this.reloadTimeSheets();
   }
 
   openDeleteModal(timeSheetEntry: TimeSheetEntry) {
@@ -112,11 +125,31 @@ export class TimeSheetPage implements OnInit {
     return this.dateService.parseDate(dateStr);
   }
 
-  addNewTimeSheetEntry() {
-    this.addNewTimeSheetModalOpen.set(true);
+  get firstDay(): string | null {
+    return this.dateRangeForm.controls.firstDay.value;
   }
 
-  closeNewTimeSheetModal() {
-    this.addNewTimeSheetModalOpen.set(false);
+  updateDateRange() {
+    const { firstDay, lastDay } = this.dateRangeForm.getRawValue();
+    if (this.dateRangeForm.invalid || !firstDay || !lastDay) {
+      return;
+    }
+
+    this.timeSheetService.getAllActiveTimeSheetEntriesBetween(firstDay, lastDay).subscribe({
+      next: (timesheets) => {
+        this.timesheets.set(timesheets);
+        this.calculateHoursLogged();
+      },
+      error: (err) => console.error('Failed to load timesheets in range', err),
+    });
+  }
+
+  reloadTimeSheets() {
+    const { firstDay, lastDay } = this.dateRangeForm.getRawValue();
+    if (firstDay && lastDay && this.dateRangeForm.valid) {
+      this.updateDateRange();
+    } else {
+      this.loadTimeSheets();
+    }
   }
 }

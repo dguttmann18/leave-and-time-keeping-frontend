@@ -32,7 +32,6 @@ export class TimeSheetService {
     return this.http.post<void>(`${this.apiUrl}/time_sheet_entry/new`, request);
   }
 
-
   updateProject(request: ProjectRequest, id: number): Observable<void> {
     return this.http.patch<void>(`${this.apiUrl}/project/update/${id}`, request);
   }
@@ -49,8 +48,12 @@ export class TimeSheetService {
     return this.http.delete<void>(`${this.apiUrl}/project/${id}`);
   }
 
-  getAllActiveTimeSheetEntries() : Observable<TimeSheetEntry[]> {
+  getAllActiveTimeSheetEntries(): Observable<TimeSheetEntry[]> {
     return this.http.get<TimeSheetEntry[]>(`${this.apiUrl}/time_sheet_entry/all`);
+  }
+
+  getAllActiveTimeSheetEntriesBetween(firstDay: string, lastDay: string): Observable<TimeSheetEntry[]> {
+    return this.http.get<TimeSheetEntry[]>(`${this.apiUrl}/time_sheet_entry/${firstDay}/${lastDay}`);
   }
 
   deleteTimeSheetEntry(id: number): Observable<void> {
