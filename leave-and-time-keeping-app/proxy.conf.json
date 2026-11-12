@@ -12,5 +12,10 @@
   "/api/leave_application": {
     "target": "http://localhost:8091",
     "secure": false
+  },
+
+  "/api/leave_due": {
+    "target": "http://localhost:8091",
+    "secure": false
   }
 }

@@ -52,8 +52,8 @@ export class TimeSheetService {
     return this.http.get<TimeSheetEntry[]>(`${this.apiUrl}/time_sheet_entry/all`);
   }
 
-  getAllActiveTimeSheetEntriesBetween(firstDay: string, lastDay: string): Observable<TimeSheetEntry[]> {
-    return this.http.get<TimeSheetEntry[]>(`${this.apiUrl}/time_sheet_entry/${firstDay}/${lastDay}`);
+  getAllActiveTimeSheetEntriesBetween(firstDay: string, lastDay: string, orderBy: string, isAscending: boolean): Observable<TimeSheetEntry[]> {
+    return this.http.get<TimeSheetEntry[]>(`${this.apiUrl}/time_sheet_entry/${firstDay}/${lastDay}/${orderBy}/${isAscending}`);
   }
 
   deleteTimeSheetEntry(id: number): Observable<void> {

@@ -31,23 +31,25 @@ export class TimeSheetPage implements OnInit {
   projects = signal<Project[]>([]);
   leaveDue = signal<LeaveDue>({ days: 0, hours: 0 });
   hoursLogged = signal(0);
+  orderBy = signal<string>('dateOfEntry');
+  isAscending = signal<boolean>(true);
   dateRangeForm = this.setupDateRangeForm();
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
   currentTimeSheetEntry?: TimeSheetEntry;
 
   ngOnInit() {
-    this.reloadTimeSheets();
+    this.loadTimeSheets();
     this.getLeaveHoursDue();
 
     this.dateRangeForm.controls.firstDay.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((first) => {
-      const last = this.dateRangeForm.controls.lastDay.value;
-      if (first && last && last < first) {
-        this.dateRangeForm.controls.lastDay.setValue(null);
-      }
-    });
+        const last = this.dateRangeForm.controls.lastDay.value;
+        if (first && last && last < first) {
+          this.dateRangeForm.controls.lastDay.setValue(null);
+        }
+      });
   }
 
   getLeaveHoursDue() {
@@ -58,14 +60,19 @@ export class TimeSheetPage implements OnInit {
   }
 
   loadTimeSheets() {
-    this.timeSheetService.getAllActiveTimeSheetEntries().subscribe({
-      next: (timesheets) => {
-        this.timesheets.set(timesheets);
-        this.getLeaveHoursDue();
-        this.calculateHoursLogged();
-      },
-      error: (err) => console.error('Failed to load timesheets', err),
-    });
+    const { firstDay, lastDay } = this.dateRangeForm.getRawValue();
+    if (this.dateRangeForm.invalid || !firstDay || !lastDay) {
+      return;
+    }
+    this.timeSheetService
+      .getAllActiveTimeSheetEntriesBetween(firstDay, lastDay, this.orderBy(), this.isAscending())
+      .subscribe({
+        next: (timesheets) => {
+          this.timesheets.set(timesheets);
+          this.calculateHoursLogged();
+        },
+        error: (err) => console.error('Failed to load timesheets', err),
+      });
   }
 
   setupDateRangeForm() {
@@ -88,6 +95,12 @@ export class TimeSheetPage implements OnInit {
     this.hoursLogged.set(hours);
   }
 
+  updateOrderBy(field: string) {
+    if (this.orderBy() === field) this.isAscending.update((val: boolean) => !val);
+    this.orderBy.set(field);
+    this.loadTimeSheets();
+  }
+
   softRefresh() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -106,7 +119,7 @@ export class TimeSheetPage implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
-    this.reloadTimeSheets();
+    this.loadTimeSheets();
   }
 
   openDeleteModal(timeSheetEntry: TimeSheetEntry) {
@@ -130,29 +143,5 @@ export class TimeSheetPage implements OnInit {
 
   get firstDay(): string | null {
     return this.dateRangeForm.controls.firstDay.value;
-  }
-
-  updateDateRange() {
-    const { firstDay, lastDay } = this.dateRangeForm.getRawValue();
-    if (this.dateRangeForm.invalid || !firstDay || !lastDay) {
-      return;
-    }
-
-    this.timeSheetService.getAllActiveTimeSheetEntriesBetween(firstDay, lastDay).subscribe({
-      next: (timesheets) => {
-        this.timesheets.set(timesheets);
-        this.calculateHoursLogged();
-      },
-      error: (err) => console.error('Failed to load timesheets in range', err),
-    });
-  }
-
-  reloadTimeSheets() {
-    const { firstDay, lastDay } = this.dateRangeForm.getRawValue();
-    if (firstDay && lastDay && this.dateRangeForm.valid) {
-      this.updateDateRange();
-    } else {
-      this.loadTimeSheets();
-    }
   }
 }
