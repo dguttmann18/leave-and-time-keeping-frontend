@@ -37,26 +37,52 @@
     </div>
 
     <div class="table">
+      <div class="new-entry-title">
+        <form class="title-items" [formGroup]="dateRangeForm">
+          <div class="title-item">
+            <label>From:</label>
+            <input
+              type="date"
+              formControlName="firstDay"
+              (change)="loadLeaveApplications()"
+            />
+          </div>
+
+          <div class="title-item">
+            <label>To:</label>
+            <input
+              type="date"
+              formControlName="lastDay"
+              [min]="firstDay"
+              (change)="loadLeaveApplications()"
+            />
+            @if (dateRangeForm.hasError('dateRange')) {
+              <span class="field-error">To date cannot be before From date</span>
+            }
+          </div>
+        </form>
+      </div>
+
       <table>
         <thead>
         <tr>
           <th class="text-column">
-            <div class="th-content"><label>First Day</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('firstDay')"><label>First Day</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Last Day</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('lastDay')"><label>Last Day</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Type</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('type')"><label>Type</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Partial</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('isPartial')"><label>Partial</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Description</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('description')"><label>Description</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column hours-column">
-          <div class="th-content number-column"><label>Hours</label> <img src="direction.png" /></div>
+          <div class="th-content number-column" (click)="updateOrderBy('hours')"><label>Hours</label> <img src="direction.png" /></div>
         </th>
           <th></th>
         </tr>

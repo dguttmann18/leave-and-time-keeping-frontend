@@ -27,8 +27,8 @@ export class LeaveService {
     return this.http.get<LeaveApplication[]>(`${this.apiUrl}/leave_application/all`);
   }
 
-  getLeaveApplicationInRange(firstDay: Date, lastDay: Date): Observable<LeaveApplication[]> {
-    return this.http.get<LeaveApplication[]>(`${this.apiUrl}/leave_application/${firstDay}/${lastDay}`);
+  getLeaveApplicationInRange(firstDay: string, lastDay: string, orderBy: string, isAscending: boolean): Observable<LeaveApplication[]> {
+    return this.http.get<LeaveApplication[]>(`${this.apiUrl}/leave_application/${firstDay}/${lastDay}/${orderBy}/${isAscending}`);
   }
 
   deleteLeaveApplication(id: number): Observable<void> {

@@ -45,7 +45,7 @@
             <input
               type="date"
               formControlName="firstDay"
-              (change)="updateDateRange()"
+              (change)="loadTimeSheets()"
             />
           </div>
 
@@ -55,7 +55,7 @@
               type="date"
               formControlName="lastDay"
               [min]="firstDay"
-              (change)="updateDateRange()"
+              (change)="loadTimeSheets()"
             />
             @if (dateRangeForm.hasError('dateRange')) {
               <span class="field-error">To date cannot be before From date</span>
@@ -68,19 +68,19 @@
         <thead>
         <tr>
           <th class="text-column">
-            <div class="th-content"><label>Date</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('dateOfEntry')"><label>Date</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Project</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('project')"><label>Project</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Description</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('description')"><label>Description</label> <img src="direction.png" /></div>
           </th>
           <th class="text-column">
-            <div class="th-content"><label>Billable</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('billable')"><label>Billable</label> <img src="direction.png"/></div>
           </th>
           <th class="hours-column">
-            <div class="th-content"><label>Hours</label> <img src="direction.png" /></div>
+            <div class="th-content" (click)="updateOrderBy('hours')"><label>Hours</label> <img src="direction.png" /></div>
           </th>
           <th></th>
         </tr>
