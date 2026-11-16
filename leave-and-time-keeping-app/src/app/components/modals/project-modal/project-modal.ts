@@ -1,8 +1,9 @@
 import { Component, effect, inject, input, OnInit, output, signal } from '@angular/core';
 import { Modal } from '../../shared/modal/modal';
-import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeSheetService } from '../../../services/time-sheet.service';
 import { Project, ProjectRequest } from '../../../models/time-sheet.model';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-project-modal',
@@ -12,19 +13,17 @@ import { Project, ProjectRequest } from '../../../models/time-sheet.model';
 })
 export class ProjectModal implements OnInit {
   private timeSheetService = inject(TimeSheetService);
+  private notify = inject(NotificationService);
 
   clients: string[] = this.timeSheetService.getAllClients();
-  newProject: ProjectRequest = { name: '', client: '', description: '' };
-  projects = signal<Project[]>([]);
   saving = signal(false);
-  saveError = signal<string | null>(null);
   projectForm!: FormGroup;
+
   data = input<Project>();
   isOpen = input.required<boolean>();
-  close = output<void>();
 
-  // protected readonly projects = projects;
-  protected readonly Date = Date;
+  close = output<void>();
+  saved = output<void>();
 
   constructor() {
     effect(() => {
@@ -42,7 +41,6 @@ export class ProjectModal implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProjects();
     this.setupProjectForm();
   }
 
@@ -75,7 +73,6 @@ export class ProjectModal implements OnInit {
     }
 
     this.saving.set(true);
-    this.saveError.set(null);
 
     const dto = this.formToDto();
     const id = this.data()?.id;
@@ -86,22 +83,17 @@ export class ProjectModal implements OnInit {
 
     request$.subscribe({
       next: () => {
+        this.notify.success(id ? 'Project updated successfully' : 'Project created successfully');
+        this.saved.emit();
+        this.closeModal();
         this.projectForm.reset();
         this.saving.set(false);
-        this.closeModal();
       },
       error: (err) => {
-        console.error('Failed to save project', err);
-        this.saveError.set('Could not save the project. Please try again.');
+        this.notify.httpError(err, 'Could not save the project. Please try again.');
         this.saving.set(false);
       },
     });
   }
 
-  loadProjects() {
-    this.timeSheetService.getAllProjects().subscribe({
-      next: (projects) => this.projects.set(projects),
-      error: (err) => console.error('Failed to load projects', err),
-    });
-  }
 }

@@ -1,30 +1,28 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DateService } from '../../../services/date.service';
 import { LeaveModal } from '../../modals/leave-modal/leave-modal';
 import { DeleteLeaveModal } from '../../modals/delete-leave-modal/delete-leave-modal';
 import { LeaveService } from '../../../services/leave.service';
-import { Router } from '@angular/router';
 import { LeaveApplication, LeaveDue } from '../../../models/leave.model';
 import { dateRangeValidator } from '../../../validators/date-range.validator';
 
 @Component({
   selector: 'app-apply-for-leave-page',
-  imports: [DatePipe, ReactiveFormsModule, LeaveModal, DeleteLeaveModal],
+  imports: [DatePipe, ReactiveFormsModule, LeaveModal, DeleteLeaveModal, DecimalPipe],
   templateUrl: './apply-for-leave-page.html',
   styleUrl: './../../../app.css',
 })
 export class ApplyForLeavePage implements OnInit {
   private leaveService = inject(LeaveService);
   private dateService = inject(DateService);
-  private router = inject(Router);
 
   protected readonly Date = Date;
 
   isModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
-  currentLeaveApplication!: LeaveApplication;
+  currentLeaveApplication?: LeaveApplication;
   orderBy = signal<string>('firstDay');
   isAscending = signal<boolean>(true);
   dateRangeForm = this.setupDateRangeForm();
@@ -43,13 +41,15 @@ export class ApplyForLeavePage implements OnInit {
       return;
     }
 
-    this.leaveService.getLeaveApplicationInRange(firstDay, lastDay, this.orderBy(), this.isAscending()).subscribe({
-      next: (leaveApplications) => {
-        this.leaveApplications.set(leaveApplications);
-        this.calculateLeaveHoursTaken();
-      },
-      error: (err) => console.error('Failed to load leave applications', err),
-    });
+    this.leaveService
+      .getLeaveApplicationInRange(firstDay, lastDay, this.orderBy(), this.isAscending())
+      .subscribe({
+        next: (leaveApplications) => {
+          this.leaveApplications.set(leaveApplications);
+          this.calculateLeaveHoursTaken();
+        },
+        error: (err) => console.error('Failed to load leave applications', err),
+      });
   }
 
   setupDateRangeForm() {
@@ -81,11 +81,9 @@ export class ApplyForLeavePage implements OnInit {
     this.leaveTaken.set(hours);
   }
 
-  softRefresh() {
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
+  openAddModal() {
+    this.currentLeaveApplication = undefined;
+    this.openModal();
   }
 
   openModal() {
@@ -93,7 +91,6 @@ export class ApplyForLeavePage implements OnInit {
   }
 
   closeModal() {
-    this.softRefresh();
     this.isModalOpen = false;
   }
 
@@ -104,7 +101,11 @@ export class ApplyForLeavePage implements OnInit {
 
   closeDeleteModal() {
     this.isDeleteModalOpen = false;
-    this.softRefresh();
+  }
+
+  onChanged() {
+    this.loadLeaveApplications();
+    this.getLeaveHoursDue();
   }
 
   openEditModal(leaveApplication: LeaveApplication) {

@@ -34,15 +34,9 @@
       }
     </div>
 
-    @if (saveError()) {
-      <div class="form-item">
-        <span class="field-error">{{ saveError() }}</span>
-      </div>
-    }
-
     <div class="button-section">
-      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
-      <button class="save-btn" type="submit">Save</button>
+      <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button type="submit" class="save-btn">Save</button>
     </div>
 
   </form>

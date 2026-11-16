@@ -1,9 +1,9 @@
-import { Component, effect, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { Modal } from '../../shared/modal/modal';
 import { LeaveService } from '../../../services/leave.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LeaveApplication, LeaveApplicationRequest } from '../../../models/leave.model';
-import { ProjectRequest } from '../../../models/time-sheet.model';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-leave-modal',
@@ -11,15 +11,18 @@ import { ProjectRequest } from '../../../models/time-sheet.model';
   templateUrl: './leave-modal.html',
   styleUrls: ['./../../shared/modal/modal.css'],
 })
-export class LeaveModal implements OnInit {
+export class LeaveModal {
   private leaveService = inject(LeaveService);
+  private notify = inject(NotificationService);
+
+  saving = signal(false);
+  leaveForm: FormGroup = this.setupLeaveForm();
 
   data = input<LeaveApplication>();
   isOpen = input.required<boolean>();
+
   close = output<void>();
-  saving = signal(false);
-  saveError = signal<string | null>(null);
-  leaveForm: FormGroup = this.setupLeaveForm();
+  saved = output<void>();
 
   constructor() {
     effect(() => {
@@ -39,28 +42,19 @@ export class LeaveModal implements OnInit {
     });
   }
 
-  ngOnInit() {}
-
   setupLeaveForm() {
     return new FormGroup({
-      firstDay: new FormControl(this.data()?.firstDay),
-      lastDay: new FormControl(this.data()?.lastDay),
-      isPartial: new FormControl(this.data()?.isPartial),
-      hours: new FormControl(this.data()?.hours),
-      leaveType: new FormControl(this.data()?.leaveType),
-      description: new FormControl(this.data()?.description),
+      firstDay: new FormControl<string | null>(null),
+      lastDay: new FormControl<string | null>(null),
+      isPartial: new FormControl<boolean>(false, { nonNullable: true }),
+      hours: new FormControl<number | null>(null),
+      leaveType: new FormControl<string | null>(null),
+      description: new FormControl<string | null>(null),
     });
   }
 
   formToDto(): LeaveApplicationRequest {
-    const {
-      firstDay,
-      lastDay,
-      isPartial,
-      hours,
-      leaveType,
-      description
-    } = this.leaveForm.value;
+    const { firstDay, lastDay, isPartial, hours, leaveType, description } = this.leaveForm.value;
 
     return {
       firstDay: firstDay ?? undefined,
@@ -68,7 +62,7 @@ export class LeaveModal implements OnInit {
       isPartial: isPartial ?? undefined,
       hours: hours ?? undefined,
       leaveType: leaveType ?? undefined,
-      description: description ?? ''
+      description: description ?? '',
     };
   }
 
@@ -83,7 +77,6 @@ export class LeaveModal implements OnInit {
     }
 
     this.saving.set(true);
-    this.saveError.set(null);
 
     const dto = this.formToDto();
     const id = this.data()?.id;
@@ -94,13 +87,16 @@ export class LeaveModal implements OnInit {
 
     request$.subscribe({
       next: () => {
+        this.notify.success(
+          id ? 'Leave request updated successfully' : 'Leave request submitted successfully',
+        );
+        this.saved.emit();
+        this.closeModal();
         this.leaveForm.reset();
         this.saving.set(false);
-        this.closeModal();
       },
       error: (err) => {
-        console.error('Failed to save leave application', err);
-        this.saveError.set('Could not save the leave application. Please try again.');
+        this.notify.httpError(err, 'Could not save leave application. Please try again.');
         this.saving.set(false);
       },
     });

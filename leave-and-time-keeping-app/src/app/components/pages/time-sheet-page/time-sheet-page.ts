@@ -6,7 +6,6 @@ import { TimeSheetModal } from '../../modals/time-sheet-modal/time-sheet-modal';
 import { TimeSheetService } from '../../../services/time-sheet.service';
 import { Project, TimeSheetEntry } from '../../../models/time-sheet.model';
 import { DeleteTimeSheetModal } from '../../modals/delete-time-sheet-modal/delete-time-sheet-modal';
-import { Router } from '@angular/router';
 import { LeaveService } from '../../../services/leave.service';
 import { LeaveDue } from '../../../models/leave.model';
 import { dateRangeValidator } from '../../../validators/date-range.validator';
@@ -22,7 +21,6 @@ export class TimeSheetPage implements OnInit {
   private dateService = inject(DateService);
   private timeSheetService = inject(TimeSheetService);
   private leaveService = inject(LeaveService);
-  private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   protected readonly Date = Date;
@@ -101,13 +99,6 @@ export class TimeSheetPage implements OnInit {
     this.loadTimeSheets();
   }
 
-  softRefresh() {
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
-
   openModal() {
     this.isModalOpen = true;
   }
@@ -119,7 +110,11 @@ export class TimeSheetPage implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  onSaved() {
     this.loadTimeSheets();
+    this.getLeaveHoursDue();
   }
 
   openDeleteModal(timeSheetEntry: TimeSheetEntry) {
@@ -129,7 +124,6 @@ export class TimeSheetPage implements OnInit {
 
   closeDeleteModal() {
     this.isDeleteModalOpen = false;
-    this.softRefresh();
   }
 
   openEditModal(timeSheetEntry: TimeSheetEntry) {
