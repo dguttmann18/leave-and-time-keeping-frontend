@@ -11,3 +11,22 @@
 html:has(dialog[open]) {
   overflow: hidden;
 }
+
+/* ---------- Snackbars ---------- */
+.snackbar-success {
+  --mat-snack-bar-container-color: #2e7d32;        /* background */
+  --mat-snack-bar-supporting-text-color: #ffffff;  /* message text */
+  --mat-snack-bar-button-color: #c8e6c9;           /* "Close" button */
+}
+
+.snackbar-error {
+  --mat-snack-bar-container-color: #c62828;
+  --mat-snack-bar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffcdd2;
+}
+
+/* Optional: shape / spacing for all snackbars */
+.mat-mdc-snack-bar-container {
+  --mat-snack-bar-container-shape: 10px;           /* rounded corners, matches your cards */
+  margin: 1rem !important;                         /* gap from the window edge */
+}

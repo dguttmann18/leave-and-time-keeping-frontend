@@ -4,6 +4,7 @@ import { Project, TimeSheetEntry, TimeSheetEntryRequest } from '../../../models/
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeSheetService } from '../../../services/time-sheet.service';
 import { DateService } from '../../../services/date.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-time-sheet-modal',
@@ -14,16 +15,19 @@ import { DateService } from '../../../services/date.service';
 export class TimeSheetModal implements OnInit {
   private timeSheetService = inject(TimeSheetService);
   private dateService = inject(DateService);
-  projects = signal<Project[]>([]);
+  private notify = inject(NotificationService);
 
-  newTimeSheetEntry: TimeSheetEntryRequest = this.blankTimeSheetEntry();
+
+  projects = signal<Project[]>([]);
   saving = signal(false);
-  saveError = signal<string | null>(null);
   timeSheetForm: FormGroup = this.setupTimeSheetForm();
-  data = input<TimeSheetEntry>();
   dataObject!: TimeSheetEntry | undefined;
+
+  data = input<TimeSheetEntry>();
   isOpen = input.required<boolean>();
+
   close = output<void>();
+  saved = output<void>();
 
   // protected readonly projects = projects;
   protected readonly Date = Date;
@@ -58,7 +62,7 @@ export class TimeSheetModal implements OnInit {
       ),
       projectId: new FormControl(this.dataObject?.project?.id),
       hours: new FormControl(this.dataObject?.hours),
-      billable: new FormControl(this.dataObject?.billable),
+      billable: new FormControl<boolean>(false, { nonNullable: true }),
       description: new FormControl(this.dataObject?.description),
     });
   }
@@ -80,16 +84,6 @@ export class TimeSheetModal implements OnInit {
     });
   }
 
-  blankTimeSheetEntry() {
-    return {
-      dateOfEntry: '',
-      projectId: -1,
-      hours: 0,
-      billable: false,
-      description: '',
-    };
-  }
-
   closeModal() {
     this.close.emit();
   }
@@ -101,7 +95,6 @@ export class TimeSheetModal implements OnInit {
     }
 
     this.saving.set(true);
-    this.saveError.set(null);
 
     const dto = this.formToDto();
     const id = this.data()?.id;
@@ -112,14 +105,14 @@ export class TimeSheetModal implements OnInit {
 
     request$.subscribe({
       next: () => {
+        this.notify.success(id ? 'Time sheet entry updated' : 'Time sheet entry added');
+        this.saved.emit();
         this.closeModal();
         this.timeSheetForm.reset({ dateOfEntry: this.dateService.today() });
         this.saving.set(false);
-
       },
       error: (err) => {
-        console.error('Failed to save time sheet entry', err);
-        this.saveError.set('Could not save the time sheet entry. Please try again.');
+        this.notify.httpError(err, 'Could not save the time sheet entry. Please try again.');
         this.saving.set(false);
       },
     });

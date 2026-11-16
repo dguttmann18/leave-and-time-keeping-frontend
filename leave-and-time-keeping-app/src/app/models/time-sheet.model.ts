@@ -18,7 +18,7 @@ export interface TimeSheetEntry {
   dateOfEntry: string;
   project?: Project;
   hours: number;
-  billable?: boolean;
+  billable: boolean;
   description?: string;
 }
 

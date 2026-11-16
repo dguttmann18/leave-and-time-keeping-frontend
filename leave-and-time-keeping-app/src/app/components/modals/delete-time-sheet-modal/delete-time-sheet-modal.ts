@@ -1,7 +1,8 @@
 import { Component, inject, input, output } from '@angular/core';
 import { TimeSheetService } from '../../../services/time-sheet.service';
-import { Project, TimeSheetEntry } from '../../../models/time-sheet.model';
+import { TimeSheetEntry } from '../../../models/time-sheet.model';
 import { Modal } from '../../shared/modal/modal';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-delete-time-sheet-modal',
@@ -11,10 +12,13 @@ import { Modal } from '../../shared/modal/modal';
 })
 export class DeleteTimeSheetModal {
   private timeSheetService = inject(TimeSheetService);
+  private notify = inject(NotificationService);
 
   data = input<TimeSheetEntry>();
   isOpen = input.required<boolean>();
+
   close = output<void>();
+  deleted = output<void>();
 
   closeModal() {
     this.close.emit();
@@ -22,12 +26,16 @@ export class DeleteTimeSheetModal {
 
   deleteTimeSheetEntry() {
     const id = this.data()?.id;
+    if (!id) return;
 
-    if (id) {
-      this.timeSheetService.deleteTimeSheetEntry(id).subscribe({
-        next: () => this.closeModal(),
-        error: (err) => console.error('Failed to delete time sheet entry', err),
-      });
-    }
+    this.timeSheetService.deleteTimeSheetEntry(id).subscribe({
+      next: () => {
+        this.notify.success('Time sheet entry deleted');
+        this.deleted.emit();
+        this.closeModal();
+      },
+      error: (err) =>
+        this.notify.httpError(err, 'Could not delete the time sheet entry. Please try again.'),
+    });
   }
 }

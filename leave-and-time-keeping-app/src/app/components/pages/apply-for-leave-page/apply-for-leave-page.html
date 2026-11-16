@@ -8,17 +8,19 @@
     <app-leave-modal
       [isOpen]="isModalOpen"
       [data]="currentLeaveApplication"
+      (saved)="onChanged()"
       (close)="closeModal()"
     />
 
     <app-delete-leave-modal
       [isOpen]="isDeleteModalOpen"
       [data]="currentLeaveApplication"
+      (deleted)="onChanged()"
       (close)="closeDeleteModal()"
     />
 
     <div class="stats-container">
-      <button (click)="openModal()">
+      <button (click)="openAddModal()">
         <img src="add.png" />
         <label>Apply for Leave</label>
       </button>
@@ -26,7 +28,7 @@
       <div class="stats-items">
         <div class="stats-item">
           <label>Leave Taken</label>
-          <p>{{ this.leaveTaken() }}</p>
+          <p>{{ this.leaveTaken() | number: '1.2-2' }}</p>
         </div>
 
         <div class="stats-item">
@@ -98,7 +100,7 @@
               </td>
             </tr>
           } @else {
-            @for (leave of leaveApplications(); track $index) {
+            @for (leave of leaveApplications(); track leave.id) {
               <tr>
                 <td>{{ parseDate(leave.firstDay) | date: "dd-MMM-yyyy" }}</td>
                 <td>{{ parseDate(leave.lastDay) | date: "dd-MMM-yyyy" }}</td>

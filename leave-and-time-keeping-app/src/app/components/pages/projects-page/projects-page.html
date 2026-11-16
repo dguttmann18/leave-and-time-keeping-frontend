@@ -8,17 +8,19 @@
     <app-project-modal
       [isOpen]="isModalOpen"
       [data]="this.currentProject"
+      (saved)="loadProjects()"
       (close)="closeModal()"
     />
 
     <app-delete-project-modal
       [isOpen]="isDeleteModalOpen"
       [data]="this.currentProject"
+      (deleted)="loadProjects()"
       (close)="closeDeleteModal()"
     />
 
     <div class="stats-container">
-      <button (click)="openModal()">
+      <button (click)="openAddModal()">
         <img src="add.png" />
         <label>Add New Project</label>
       </button>
